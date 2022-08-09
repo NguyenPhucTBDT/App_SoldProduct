@@ -19,15 +19,16 @@
             android:layout_height="@dimen/dp_170"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:src="@drawable/ic_logo" />
+            />
 
         <TextView
             android:id="@+id/tvPlatform"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imgLogoMisa"
+            android:text="Đăng nhập"
+            android:textStyle="bold"
             android:layout_centerInParent="true"
-            android:text="@string/ominichannelplatform"
             android:textColor="@color/white"
             android:textSize="@dimen/ts20" />
 
@@ -36,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvPlatform"
             android:layout_centerInParent="true"
-            android:text="@string/for_sale"
             android:textColor="@color/white"
             android:textSize="@dimen/ts16" />
 
@@ -101,6 +101,7 @@
             android:background="@drawable/login_button_background"
             android:padding="@dimen/de10"
             android:text="@string/log_in"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
@@ -123,6 +124,7 @@
         android:weightSum="3">
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -150,6 +152,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/tvPrivacyPolicy"
@@ -175,6 +178,7 @@
         </LinearLayout>
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tvPrivacyPolicy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
