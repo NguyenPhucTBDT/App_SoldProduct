@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:padding="@dimen/de10"
+    android:background="@drawable/border_layout"
+    android:layout_height="100dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_title"
+        android:text="Bí đỏ"
+        android:textColor="@color/white"
+        android:textSize="@dimen/ts16"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/tv_quantity"
+        android:text="Bí đỏ"
+        android:textColor="@color/white"
+        android:textSize="@dimen/ts16"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/tv_price"
+        android:text="Bí đỏ"
+        android:textColor="#1BDA15"
+        android:textSize="@dimen/ts16"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"/>
+    </LinearLayout>
+</RelativeLayout>

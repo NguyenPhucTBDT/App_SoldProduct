@@ -11,9 +11,9 @@
     <string name="tel">Số điện thoại</string>
     <string name="sale">Bán hàng</string>
     <string name="shipping_book">Sổ giao hàng</string>
-    <string name="list_of_bill">Danh sách hóa đơn</string>
+    <string name="list_of_bill">Đơn hàng</string>
     <string name="support">Hỗ trợ: 1900 8677</string>
-    <string name="get_payment">Thu tiền</string>
+    <string name="get_payment">Đặt hàng</string>
     <string name="all">Tổng </string>
     <string name="receivable">Còn phải thu</string>
     <string name="buy_more">Mua thêm</string>
@@ -61,6 +61,9 @@
     <string name="clear_filter">Bỏ lọc</string>
     <string name="done">Xong</string>
     <string name="size_filter">Kích cỡ</string>
+    <string name="message_quantity">Số lượng không được ít hơn 0.Hãy kiểm tra lại</string>
+    <string name="login_account">Tài khoản/mật khẩu không được để trống!</string>
+    <string name="connect_error">Không có kết nối Internet!</string>
     <string name="available_item"><![CDATA[hàng hóa có sẵn(sl>0)]]></string>
     <string-array name="spnDay">
         <item>Hôm nay</item>

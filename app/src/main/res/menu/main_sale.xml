@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
    <item android:title="@string/sale" android:id="@+id/mnSale"/>
-   <item android:title="@string/shipping_book" android:id="@+id/mnShippingBook"/>
    <item android:title="@string/list_of_bill" android:id="@+id/mnBill"></item>
+   <item android:id="@+id/mnShoppingCart" android:title="Giỏ hàng"></item>
+   <item android:id="@+id/mnLogOut" android:title="Đăng xuất"></item>
 </menu>

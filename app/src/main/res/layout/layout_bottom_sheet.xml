@@ -18,22 +18,22 @@
 
     <TextView
         android:id="@+id/tvSKU"
-        android:textColor="@color/color_SKU"
         android:layout_width="200dp"
         android:layout_height="25dp"
         android:layout_below="@id/tvName"
         android:layout_marginStart="@dimen/de10"
         android:text="AD02"
+        android:textColor="@color/black"
         android:textSize="@dimen/ts16" />
 
     <ImageButton
-        android:src="@drawable/ic_subtract"
         android:id="@+id/btnSubtract"
         android:layout_width="@dimen/d30"
         android:layout_height="@dimen/d30"
         android:layout_marginTop="@dimen/d5"
         android:layout_toStartOf="@id/tvAmount"
         android:background="@drawable/border_button_bottomsheet"
+        android:src="@drawable/ic_subtract"
         android:text="-"
         android:textColor="@color/white"
         android:textSize="@dimen/ts16" />
@@ -60,4 +60,33 @@
         android:textColor="@color/white"
         android:textSize="@dimen/ts16"
         android:textStyle="bold" />
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_below="@id/tvSKU"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:text="Thêm vào giỏ hàng"
+            android:id="@+id/btn_add_cart"
+            android:textColor="@color/violet_dark"
+            android:textAllCaps="false"
+            android:textSize="@dimen/ts16"
+            android:background="@drawable/border_bottom_sheet"
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:text="Mua ngay"
+            android:id="@+id/btn_buy_now"
+            android:textSize="@dimen/ts16"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:background="@drawable/border_layout"
+            android:layout_margin="5dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 </RelativeLayout>

@@ -1,6 +1,10 @@
 package com.misa.fresher.model
 
 data class User(
-   val email:String,
-   val password:String
+    val id : Int,
+    val account: String,
+    val password: String,
+    val fullname: String,
 )
+{
+}

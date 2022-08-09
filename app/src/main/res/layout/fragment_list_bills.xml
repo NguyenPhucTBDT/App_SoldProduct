@@ -14,7 +14,7 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/ibMenuLB"
+            android:id="@+id/ib_menu_lb"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/d5"
@@ -28,7 +28,7 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="8"
             android:gravity="center"
-            android:text="@string/list_of_bills"
+            android:text="@string/list_of_bill"
             android:textColor="@color/white"
             android:textSize="@dimen/ts16" />
 
@@ -118,7 +118,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvBill"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/llTotalPrice" />
 
     <ImageButton

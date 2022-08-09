@@ -1,6 +1,6 @@
 package com.misa.fresher.adapter
 
-import android.view.*
+import android.view.* // ktlint-disable no-wildcard-imports
 import android.widget.ImageView
 import android.widget.TextView
 import com.misa.fresher.R
@@ -27,10 +27,16 @@ class ProductApdapter(
                 this.findViewById<ImageView>(R.id.imgProductImage).setImageResource(R.drawable.giay)
                 this.findViewById<TextView>(R.id.tvProductName).text = item.productName
                 this.findViewById<TextView>(R.id.tvProductSKU).text = item.productSKU
-                val decimalFormat=DecimalFormat("0,000.00")
-                this.findViewById<TextView>(R.id.tvProductPrice).text = decimalFormat.format(item.productPrice).toString()
+                val decimalFormat = DecimalFormat("0,000.00")
+                this.findViewById<TextView>(R.id.tvProductPrice).text =
+                    decimalFormat.format(item.productPrice).toString()
             }
         }
     }
-}
 
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        holder.bindData(items[position])
+    }
+
+    override fun getItemCount(): Int = items.size
+}

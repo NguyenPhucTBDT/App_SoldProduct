@@ -15,8 +15,3 @@ fun Context.showToast(string: String) {
     toast.setGravity(Gravity.TOP, 0, 0)
     toast.show()
 }
-//fun test{
-//    CoroutineScope(IO).launch {
-//
-//    }
-//}

@@ -28,10 +28,12 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="6"
             android:gravity="center"
-            android:text="2203500001"
+            android:textSize="@dimen/ts16"
+            android:text="Đặt hàng"
             android:textColor="@color/white" />
 
         <ImageButton
+            android:id="@+id/imb_cart"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -40,6 +42,7 @@
             android:src="@drawable/ic_baseline_shopping_cart_24" />
 
         <ImageButton
+            android:id="@+id/img_more"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -135,10 +138,11 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:padding="@dimen/de10"
         android:id="@+id/rvSelectedProduct"
-        android:layout_above="@id/llTotal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/llTotal"
         android:layout_below="@id/llBuyMore" />
 
     <LinearLayout

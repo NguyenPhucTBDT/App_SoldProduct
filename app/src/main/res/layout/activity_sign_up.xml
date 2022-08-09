@@ -19,8 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_170"
             android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
-            android:src="@drawable/ic_logo" />
+            android:layout_centerInParent="true" />
 
         <TextView
             android:id="@+id/tvPlatform"
@@ -28,16 +27,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/imgLogoMisa"
             android:layout_centerInParent="true"
-            android:text="@string/ominichannelplatform"
+            android:text="Đăng ký"
             android:textColor="@color/white"
-            android:textSize="@dimen/ts20" />
+            android:textSize="@dimen/ts20"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvPlatform"
             android:layout_centerInParent="true"
-            android:text="@string/for_sale"
             android:textColor="@color/white"
             android:textSize="@dimen/ts16" />
 
@@ -45,22 +44,22 @@
 
     <LinearLayout
         android:id="@+id/llSignUpForm"
-        android:layout_below="@id/rlLogo"
-        android:layout_marginTop="@dimen/d25"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/rlLogo"
         android:layout_marginHorizontal="@dimen/d25"
+        android:layout_marginTop="@dimen/d25"
         android:background="@drawable/custom_background_login"
         android:orientation="vertical"
         android:paddingVertical="@dimen/de10"
         android:weightSum="7">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_weight="2"
             android:id="@+id/test"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_weight="2"
             app:endIconMode="clear_text"
             app:hintEnabled="false"
             app:startIconDrawable="@drawable/ic_user"
@@ -79,9 +78,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_weight="2"
             app:endIconMode="clear_text"
             app:hintEnabled="false"
-            android:layout_weight="2"
             app:startIconDrawable="@drawable/ic_baseline_lock_open_24"
             app:startIconTint="@color/violet_dark">
 
@@ -99,11 +98,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_weight="2"
             app:endIconMode="clear_text"
             app:hintEnabled="false"
-            android:layout_weight="2"
             app:startIconDrawable="@drawable/ic_baseline_lock_open_24"
             app:startIconTint="@color/violet_dark">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tietReEnterPassword"
                 android:layout_width="match_parent"
@@ -111,6 +111,26 @@
                 android:layout_marginTop="@dimen/de10"
                 android:hint="@string/re_enter_password"
                 android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_weight="2"
+            app:endIconMode="clear_text"
+            app:hintEnabled="false"
+            app:startIconDrawable="@drawable/ic_user"
+            app:startIconTint="@color/violet_dark">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tiet_full_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/de10"
+                android:hint="Nhập họ và tên"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -123,6 +143,7 @@
             android:layout_weight="0.5"
             android:background="@drawable/login_button_background"
             android:padding="@dimen/de10"
+            android:textAllCaps="false"
             android:text="@string/sign_up_account"
             android:textColor="@color/white"
             android:textSize="@dimen/ts16" />
@@ -139,14 +160,15 @@
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_below="@id/llSignUpForm"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/llSignUpForm"
         android:layout_weight="5"
         android:orientation="vertical"
         android:weightSum="3">
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -174,6 +196,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/tvPrivacyPolicy"
@@ -199,6 +222,7 @@
         </LinearLayout>
 
         <TextView
+            android:visibility="gone"
             android:id="@+id/tvPrivacyPolicy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -210,18 +234,19 @@
             android:textSize="15sp" />
 
     </RelativeLayout>
+
     <FrameLayout
         android:id="@+id/flProgressBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:background="#80D5CFCF"
         android:layout_alignParentBottom="true"
+        android:background="#80D5CFCF"
         android:visibility="gone">
+
         <ProgressBar
-            android:indeterminateDrawable="@drawable/ic_logo_gray"
-            android:layout_gravity="center"
             android:layout_width="@dimen/d50"
-            android:layout_height="@dimen/d50"/>
+            android:layout_height="@dimen/d50"
+            android:layout_gravity="center" />
     </FrameLayout>
 </RelativeLayout>

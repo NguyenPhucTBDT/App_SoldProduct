@@ -5,11 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragment.FilterFragment">
+
     <LinearLayout
         android:id="@+id/layoutSwitch"
-        android:layout_margin="@dimen/d5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/d5"
         android:orientation="horizontal">
 
         <androidx.appcompat.widget.SwitchCompat
@@ -19,13 +20,13 @@
             android:theme="@style/SCBSwitch" />
 
         <TextView
-            android:textSize="@dimen/ts16"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/de10"
             android:gravity="center_vertical"
-            android:textAllCaps="true"
             android:text="@string/available_item"
+            android:textAllCaps="true"
+            android:textSize="@dimen/ts16"
             tools:ignore="AllCaps" />
     </LinearLayout>
 
@@ -40,27 +41,31 @@
         android:layout_marginBottom="@dimen/d5"
         android:text="@string/sort_by"
         android:textColor="@color/black"
-        android:textSize="@dimen/ts16" />
+        android:textSize="@dimen/ts20"
+        android:textStyle="bold" />
+
     <RadioGroup
-        android:layout_below="@id/tvSortby"
         android:id="@+id/rgSortby"
-        android:theme="@style/SCBSwitch"
-        android:layout_margin="@dimen/d5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSortby"
+        android:layout_margin="@dimen/d5"
+        android:theme="@style/SCBSwitch">
+
         <RadioButton
-            android:textSize="@dimen/ts16"
-            android:text="@string/name"
-            android:checked="true"
             android:id="@+id/rbName"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/name"
+            android:textSize="@dimen/ts16" />
+
         <RadioButton
-            android:textSize="@dimen/ts16"
-            android:text="@string/price"
             android:id="@+id/rbPrice"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            android:textSize="@dimen/ts16" />
     </RadioGroup>
 
     <TextView
@@ -72,9 +77,10 @@
         android:layout_marginTop="@dimen/d5"
         android:layout_marginEnd="@dimen/d5"
         android:layout_marginBottom="@dimen/d5"
-        android:text="@string/color"
+        android:text="Phân loại"
         android:textColor="@color/black"
-        android:textSize="@dimen/ts16" />
+        android:textSize="@dimen/ts20"
+        android:textStyle="bold" />
 
     <Spinner
         android:id="@+id/spnColor"
@@ -95,43 +101,97 @@
         android:layout_marginEnd="@dimen/d5"
         android:layout_marginBottom="@dimen/d5"
         android:background="@null"
-        android:text="@string/size_filter"
-        android:textAllCaps="true"
+        android:text="Loại hiển thị"
+        android:textStyle="bold"
+        android:textAllCaps="false"
         android:textColor="@color/black"
-        android:textSize="@dimen/ts16" />
+        android:textSize="@dimen/ts20" />
 
-    <Spinner
-        android:id="@+id/spnSize"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/d30"
-        android:layout_below="@id/tvSize"
-        android:layout_marginStart="@dimen/d5"
-        android:background="@color/white"
-        android:textSize="@dimen/ts16" />
+    <!--    <Spinner-->
+    <!--        android:id="@+id/spnSize"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="@dimen/d30"-->
+    <!--        android:layout_below="@id/tvSize"-->
+    <!--        android:layout_marginStart="@dimen/d5"-->
+    <!--        android:background="@color/white"-->
+    <!--        android:textSize="@dimen/ts16" />-->
     <LinearLayout
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d50">
-        <Button
-            android:layout_margin="@dimen/d5"
-            android:text="@string/clear_filter"
-            android:background="@drawable/buttom_clear_filter_border"
-            android:textSize="@dimen/ts16"
-            android:textColor="@color/violet_dark"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvSize"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
             android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:layout_height="@dimen/d50"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:layout_marginStart="5dp"
+                android:background="@drawable/border_layout"
+                android:layout_width="@dimen/d50"
+                android:layout_height="@dimen/d50" />
+            <TextView
+                android:text="Kiểu lưới"
+                android:textColor="@color/violet_dark"
+                android:textSize="@dimen/ts16"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/d50"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:orientation="horizontal"
+            android:layout_height="@dimen/d50"
+            android:layout_weight="1">
+
+            <ImageButton
+                android:background="@drawable/border_layout"
+                android:layout_width="@dimen/d50"
+                android:layout_height="@dimen/d50" />
+            <TextView
+                android:text="Kiểu thẳng hàng"
+                android:textColor="@color/violet_dark"
+                android:textSize="@dimen/ts16"
+                android:layout_marginStart="10dp"
+                android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/d50"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/d50"
+        android:layout_alignParentBottom="true">
+
+        <Button
             android:id="@+id/btnClearnFilter"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_height="match_parent"/>
-        <Button
-            android:layout_margin="@dimen/d5"
-            android:text="@string/done"
-            android:id="@+id/btnDone"
-            android:background="@drawable/button_done_border"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/d5"
+            android:layout_weight="1"
+            android:background="@drawable/buttom_clear_filter_border"
+            android:gravity="center"
+            android:text="@string/clear_filter"
+            android:textColor="@color/violet_dark"
+            android:textSize="@dimen/ts16" />
+
+        <Button
+            android:id="@+id/btnDone"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/d5"
+            android:layout_weight="1"
+            android:background="@drawable/button_done_border"
+            android:gravity="center"
+            android:text="@string/done"
+            android:textColor="@color/white" />
     </LinearLayout>
 </RelativeLayout>

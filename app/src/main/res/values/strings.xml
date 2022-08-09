@@ -12,11 +12,11 @@
     <string name="tel">Tel</string>
     <string name="sale">Sale</string>
     <string name="shipping_book">Shipping book</string>
-    <string name="list_of_bill">List of bills</string>
+    <string name="list_of_bill">Oder</string>
     <string name="support">Support: 1900 8677</string>
     <string name="all">Total </string>
     <string name="receivable">Receivable</string>
-    <string name="get_payment">Get payment</string>
+    <string name="get_payment">Oder</string>
     <string name="buy_more">Buy more</string>
     <string name="privacy_policy">Privacty policy</string>
     <string name="sign_up">Sign up?</string>
@@ -62,6 +62,9 @@
     <string name="clear_filter">Clear filter</string>
     <string name="done">Done</string>
     <string name="size_filter">SIZE</string>
+    <string name="message_quantity">Quantity cannot be less than 0.Please check again</string>
+    <string name="login_account">Account/password cannot be blank!</string>
+    <string name="connect_error">No network connection!</string>
     <string name="available_item"><![CDATA[available items(QTY>0)]]></string>
     <string-array name="spnDay">
         <item>Today</item>
@@ -91,4 +94,6 @@
         <item>M</item>
         <item>XXL</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

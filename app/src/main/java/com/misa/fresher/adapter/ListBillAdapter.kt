@@ -1,39 +1,50 @@
 package com.misa.fresher.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.R
+import com.misa.fresher.databinding.ListBillItemLayoutBinding
 import com.misa.fresher.model.BillInfor
+import com.misa.fresher.model.Invoice
+import com.misa.fresher.model.SelectedProduct
 import java.text.DecimalFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ListBillAdapter(
-    private val mListBill: ArrayList<BillInfor>,
+    private val mListInvoice: ArrayList<Invoice>,
+    val updateView: (invoice: Invoice) -> Unit
 ) :
     RecyclerView.Adapter<ListBillAdapter.ViewHolder>() {
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val tvBillNum =itemView.findViewById<TextView>(R.id.tvBillNum)
+    inner class ViewHolder(binding: ListBillItemLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        private val tvBillNum = binding.tvBillNum
         private val decimalFormat = DecimalFormat("0,000.0")
-        private val tvBillAmount=itemView.findViewById<TextView>(R.id.tvBillAmount)
-        fun bind(billInfor: BillInfor) {
-            tvBillNum.text = billInfor.billNum.toString()
-            tvBillAmount.text = decimalFormat.format(billInfor.total).toString()
+        private val tvBillAmount = binding.tvBillAmount
+        private val llListOder = binding.llListOder
+        fun bind(invoice: Invoice) {
+            tvBillNum.text = invoice.id.toString()
+            tvBillAmount.text = decimalFormat.format(invoice.amount).toString() + " VNĐ"
+            tvBillAmount.setTextColor(Color.GREEN)
+            llListOder.setOnClickListener { updateView(invoice) }
         }
     }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ListBillAdapter.ViewHolder {
-        val context = parent.context
-        val li = LayoutInflater.from(context)
-        val contactView = li.inflate(R.layout.list_bill_item_layout, parent, false)
-        return ViewHolder(contactView)
+        val binding: ListBillItemLayoutBinding by lazy {
+            ListBillItemLayoutBinding.inflate(
+                LayoutInflater.from(parent.context)
+            )
+        }
+        return ViewHolder(binding)
     }
 
-    override fun getItemCount() = mListBill.size
+    override fun getItemCount() = mListInvoice.size
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(mListBill[position])
+        holder.bind(mListInvoice[position])
     }
 }
