@@ -18,7 +18,7 @@ import com.misa.fresher.model.*
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
 import com.misa.fresher.showToast
-import com.misa.fresher.viewpager.UserViewModel
+import com.misa.fresher.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main

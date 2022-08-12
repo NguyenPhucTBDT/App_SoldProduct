@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.misa.fresher.R
 import com.misa.fresher.model.Category
 
 class AdapterCate(
@@ -28,7 +29,10 @@ class AdapterCate(
     ): View {
         val view: TextView = convertView as TextView? ?: LayoutInflater.from(context)
             .inflate(layoutResource, parent, false) as TextView
-        view.text = categories!![position].nameCategory
+        view.apply {
+            this.text = categories[position].nameCategory
+            this.setTextColor(resources.getColor( R.color.violet_dark))
+        }
         return view
     }
 }

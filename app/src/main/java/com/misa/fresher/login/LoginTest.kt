@@ -16,7 +16,7 @@ import com.misa.fresher.signup.SignUpActivity
 import com.misa.fresher.databinding.ActivityLoginBinding
 import com.misa.fresher.model.User
 import com.misa.fresher.showToast
-import com.misa.fresher.viewpager.UserViewModel
+import com.misa.fresher.viewmodel.UserViewModel
 
 class LoginTest : AppCompatActivity(), LoginContract.View {
     private val binding: ActivityLoginBinding by lazy { getInflater(layoutInflater) }

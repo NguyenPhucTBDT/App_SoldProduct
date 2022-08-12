@@ -10,14 +10,11 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.misa.fresher.R
-import com.misa.fresher.ShipInforModel
-import com.misa.fresher.model.SelectedProduct
+import com.misa.fresher.viewmodel.ShipInforModel
 import com.misa.fresher.model.ShipInfor
 import com.misa.fresher.viewpager.PackageFragment
 import com.misa.fresher.viewpager.PageAdapter

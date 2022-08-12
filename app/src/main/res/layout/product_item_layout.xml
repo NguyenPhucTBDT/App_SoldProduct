@@ -20,23 +20,23 @@
         android:text="Bí đỏ"
         android:textColor="@color/violet_dark"
         android:textSize="@dimen/ts16" />
-
     <TextView
-        android:id="@+id/tv_manufacture"
+        android:layout_marginTop="@dimen/d5"
+        android:id="@+id/tv_sale_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/d5"
-        android:gravity="end"
-        android:text="Clever Fruit"
-        android:textColor="@color/violet_dark"
+        android:gravity="left"
+        android:text="10000"
+        android:textColor="#E60D0D"
         android:textSize="@dimen/ts16" />
-
     <TextView
+        android:layout_marginTop="@dimen/d5"
         android:id="@+id/tv_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/d5"
-        android:gravity="end"
+        android:gravity="left"
         android:text="10000"
         android:textColor="#E60D0D"
         android:textSize="@dimen/ts16" />

@@ -4,41 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_login"
+    android:background="@drawable/bg_login_1"
     android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rlLogo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
+        android:layout_marginHorizontal="@dimen/d25"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imgLogoMisa"
+            android:layout_marginTop="@dimen/d100"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_170"
+            android:layout_height="150dp"
+            android:src="@drawable/logo"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true" />
-
-        <TextView
-            android:id="@+id/tvPlatform"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/imgLogoMisa"
-            android:layout_centerInParent="true"
-            android:text="Đăng ký"
-            android:textColor="@color/white"
-            android:textSize="@dimen/ts20"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvPlatform"
-            android:layout_centerInParent="true"
-            android:textColor="@color/white"
-            android:textSize="@dimen/ts16" />
 
     </RelativeLayout>
 
@@ -148,14 +131,38 @@
             android:textColor="@color/white"
             android:textSize="@dimen/ts16" />
 
-        <TextView
-            android:id="@+id/tvLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="0.5"
-            android:clickable="true"
-            android:text="@string/log_in" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1.3"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Bạn đã có tài khoản ?"
+                android:layout_marginTop="@dimen/de10"
+                android:layout_marginBottom="@dimen/d5"
+                android:textSize="@dimen/ts16"
+                android:gravity="right"
+                />
+            <TextView
+                android:id="@+id/tvLogin"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="left"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="@dimen/d5"
+                android:textSize="@dimen/ts16"
+                android:textColor="@color/violet_dark"
+                android:layout_marginTop="@dimen/de10"
+                android:text="@string/log_in" />
+        </LinearLayout>
+
+
 
     </LinearLayout>
 
@@ -168,13 +175,13 @@
         android:weightSum="3">
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
             android:layout_marginTop="@dimen/dp_20"
             android:orientation="horizontal"
+            android:visibility="gone"
             tools:ignore="UselessParent">
 
             <TextView
@@ -196,12 +203,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@id/tvPrivacyPolicy"
             android:layout_centerInParent="true"
             android:orientation="horizontal"
+            android:visibility="gone"
             tools:ignore="UseCompoundDrawables,UselessParent">
 
             <ImageView
@@ -222,7 +229,6 @@
         </LinearLayout>
 
         <TextView
-            android:visibility="gone"
             android:id="@+id/tvPrivacyPolicy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -231,7 +237,8 @@
             android:layout_marginVertical="@dimen/de10"
             android:text="@string/privacy_policy"
             android:textColor="@color/white"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

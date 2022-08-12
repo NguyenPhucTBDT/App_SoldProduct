@@ -4,35 +4,32 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.AdapterCate
-import com.misa.fresher.adapter.VegetableAdapter
+import com.misa.fresher.adapter.AdapterProduct
 import com.misa.fresher.databinding.FragmentSaleBinding
 import com.misa.fresher.login.LoginActivity
 import com.misa.fresher.model.*
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
 import com.misa.fresher.showToast
-import com.misa.fresher.viewpager.UserViewModel
+import com.misa.fresher.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -45,11 +42,10 @@ import kotlin.collections.ArrayList
 
 class SaleFragment : Fragment() {
     private val binding: FragmentSaleBinding by lazy { FragmentSaleBinding.inflate(layoutInflater) }
-    var productList = arrayListOf<SelectedProduct>()
-    var vegetables: ArrayList<Vegetable>? = null
+    var products: ArrayList<Product>? = null
     val viewModel: UserViewModel by activityViewModels()
     private var categories: ArrayList<Category>? = null
-    var vegetableAdapter: VegetableAdapter? = null
+    var adapterProduct: AdapterProduct? = null
     private val decimalFormat = DecimalFormat("0,000.0")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,10 +60,11 @@ class SaleFragment : Fragment() {
         getListVegetable()
         searchProduct(view)
         clearProduct()
-        showBillFragment()
-        updateView()
+        //showBillFragment()
+        //updateView()
         configFilter(view)
         getListVegetable()
+        refresh()
     }
 
     /**
@@ -75,11 +72,13 @@ class SaleFragment : Fragment() {
      *@author:NCPhuc
      *@date:3/16/2022
      **/
-    private fun setUpView(vet: List<Vegetable>) {
-        vegetableAdapter =
-            VegetableAdapter(vet as ArrayList<Vegetable>) { showBottomDialog(it) }
-        binding.rcvProduct.adapter = vegetableAdapter
-        binding.rcvProduct.layoutManager = LinearLayoutManager(requireContext())
+    private fun setUpView(vet: List<Product>) {
+        adapterProduct =
+            AdapterProduct(vet as ArrayList<Product>) {
+//                showBottomDialog(it)
+            }
+        binding.rcvProduct.adapter = adapterProduct
+        binding.rcvProduct.layoutManager = GridLayoutManager(requireContext(),2)
         setUpNavigation()
         openDrawerLayoutMenu()
     }
@@ -114,15 +113,15 @@ class SaleFragment : Fragment() {
      *@author:NCPhuc
      *@date:3/16/2022
      **/
-    private fun showBottomDialog(vegetable: Vegetable) {
+    private fun showBottomDialog(product: Product) {
         val bottomSheetDialog =
             BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme)
         val bottomSheetView: View =
             LayoutInflater.from(requireContext())
                 .inflate(R.layout.layout_bottom_sheet, view as DrawerLayout, false)
         bottomSheetDialog.setContentView(bottomSheetView)
-        bottomSheetDialog.findViewById<TextView>(R.id.tvName)!!.text = vegetable.nameVegetable
-        bottomSheetDialog.findViewById<TextView>(R.id.tvSKU)!!.text = vegetable.price.toString()
+        bottomSheetDialog.findViewById<TextView>(R.id.tvName)!!.text = product.product_name
+        bottomSheetDialog.findViewById<TextView>(R.id.tvSKU)!!.text = product.price.toString()
         bottomSheetDialog.show()
         val tvAmount =
             bottomSheetView.findViewById<TextView>(R.id.tvAmount)
@@ -141,30 +140,30 @@ class SaleFragment : Fragment() {
                 activity?.showToast(this.getString(R.string.message_quantity))
             }
         }
-        bottomSheetDialog.findViewById<Button>(R.id.btn_buy_now)?.setOnClickListener {
-            if (checkSelectedProduct(vegetable.idVegetable)) {
-                for (i in productList) {
-                    if (i.product.idVegetable == vegetable.idVegetable) {
-                        i.amount = i.amount + amount
-                    }
-                }
-            } else {
-                productList.add(SelectedProduct(vegetable, amount))
-            }
-            updateView()
-            bottomSheetDialog.dismiss()
-        }
-        bottomSheetDialog.findViewById<Button>(R.id.btn_add_cart)?.setOnClickListener {
-            val shoppingCart = ShoppingCart(
-                vegetable.idVegetable,
-                vegetable.nameVegetable.toString(), amount, vegetable.price
-            )
-            viewModel.customer.observe(viewLifecycleOwner, Observer<UserRespone> {
-                addCart(shoppingCart, it.id)
-                bottomSheetDialog.dismiss()
-            })
-
-        }
+//        bottomSheetDialog.findViewById<Button>(R.id.btn_buy_now)?.setOnClickListener {
+//            if (checkSelectedProduct(vegetable.idVegetable)) {
+//                for (i in productList) {
+//                    if (i.product.idVegetable == vegetable.idVegetable) {
+//                        i.amount = i.amount + amount
+//                    }
+//                }
+//            } else {
+//                productList.add(SelectedProduct(vegetable, amount))
+//            }
+//            updateView()
+//            bottomSheetDialog.dismiss()
+//        }
+//        bottomSheetDialog.findViewById<Button>(R.id.btn_add_cart)?.setOnClickListener {
+//            val shoppingCart = ShoppingCart(
+//                vegetable.idVegetable,
+//                vegetable.nameVegetable.toString(), amount, vegetable.price
+//            )
+//            viewModel.customer.observe(viewLifecycleOwner, Observer<UserRespone> {
+//                addCart(shoppingCart, it.id)
+//                bottomSheetDialog.dismiss()
+//            })
+//
+//        }
     }
 
     /**
@@ -185,15 +184,15 @@ class SaleFragment : Fragment() {
      *@date:3/16/2022
      **/
     private fun updateList(strSearch: String) {
-        val productSearch = mutableListOf<Vegetable>()
-        for (i in vegetables!!) {
-            if (i.nameVegetable?.lowercase()?.contains(strSearch.lowercase())!!) {
+        val productSearch = mutableListOf<Product>()
+        for (i in products!!) {
+            if (i.product_name?.lowercase()?.contains(strSearch.lowercase())!!) {
                 productSearch.add(i)
             }
         }
-        vegetableAdapter =
-            VegetableAdapter(productSearch as ArrayList<Vegetable>) { showBottomDialog(it) }
-        binding.rcvProduct.adapter = vegetableAdapter
+        adapterProduct =
+            AdapterProduct(productSearch as ArrayList<Product>) { showBottomDialog(it) }
+        binding.rcvProduct.adapter = adapterProduct
     }
 
     /**
@@ -215,7 +214,7 @@ class SaleFragment : Fragment() {
             }
             binding.llRefresh.setBackgroundResource(R.drawable.border_button)
             binding.ivRefresh.setBackgroundResource(R.drawable.border_button)
-            productList.clear()
+            //productList.clear()
         }
     }
 
@@ -225,26 +224,26 @@ class SaleFragment : Fragment() {
      *@date:3/16/2022
      **/
     @SuppressLint("SetTextI18n")
-    private fun updateView() {
-        if (productList.size > 0) {
-            binding.tvProductAmount.let { view ->
-                view.text = productList.sumOf { it.amount }.toString()
-                view.setTextColor(Color.WHITE)
-                view.setBackgroundResource(R.drawable.textview_amount_border)
-            }
-            binding.tvTotalPrice.let { view ->
-                view.text =
-                    context?.getText(R.string.all).toString() + " " + decimalFormat.format(
-                        productList.sumOf { it.amount * it.product.price.toDouble() }
-                    )
-                        .toString()
-                view.setTextColor(Color.WHITE)
-                view.setBackgroundResource(R.drawable.textview_totalprice_border)
-            }
-            binding.ivRefresh.setBackgroundResource(R.drawable.linearlayout_refresh_border)
-            binding.llRefresh.setBackgroundResource(R.drawable.linearlayout_refresh_border)
-        }
-    }
+//    private fun updateView() {
+//        if (productList.size > 0) {
+//            binding.tvProductAmount.let { view ->
+//                view.text = productList.sumOf { it.amount }.toString()
+//                view.setTextColor(Color.WHITE)
+//                view.setBackgroundResource(R.drawable.textview_amount_border)
+//            }
+//            binding.tvTotalPrice.let { view ->
+//                view.text =
+//                    context?.getText(R.string.all).toString() + " " + decimalFormat.format(
+//                        productList.sumOf { it.amount * it.product.price.toDouble() }
+//                    )
+//                        .toString()
+//                view.setTextColor(Color.WHITE)
+//                view.setBackgroundResource(R.drawable.textview_totalprice_border)
+//            }
+//            binding.ivRefresh.setBackgroundResource(R.drawable.linearlayout_refresh_border)
+//            binding.llRefresh.setBackgroundResource(R.drawable.linearlayout_refresh_border)
+//        }
+//    }
 
     /**
      *Mở navigationView ở phía bên trái của màn hình
@@ -294,42 +293,42 @@ class SaleFragment : Fragment() {
      *@author:NCPhuc
      *@date:3/16/2022
      **/
-    private fun showBillFragment() {
-        val drawerLayout = (activity as MainActivity).findViewById<DrawerLayout>(R.id.dlLeft)
-        binding.tvProductAmount.setOnClickListener {
-            drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
-            if (productList.size > 0) {
-                findNavController().navigate(
-                    R.id.action_saleFragment_to_billDetailFragment,
-                    bundleOf("product" to productList)
-                )
-            }
-        }
-        binding.tvTotalPrice.setOnClickListener {
-            drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
-            if (productList.size > 0) {
-                findNavController().navigate(
-                    R.id.action_saleFragment_to_billDetailFragment,
-                    bundleOf("product" to productList)
-                )
-            }
-        }
-    }
+//    private fun showBillFragment() {
+//        val drawerLayout = (activity as MainActivity).findViewById<DrawerLayout>(R.id.dlLeft)
+//        binding.tvProductAmount.setOnClickListener {
+//            drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
+//            if (productList.size > 0) {
+//                findNavController().navigate(
+//                    R.id.action_saleFragment_to_billDetailFragment,
+//                    bundleOf("product" to productList)
+//                )
+//            }
+//        }
+//        binding.tvTotalPrice.setOnClickListener {
+//            drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
+//            if (productList.size > 0) {
+//                findNavController().navigate(
+//                    R.id.action_saleFragment_to_billDetailFragment,
+//                    bundleOf("product" to productList)
+//                )
+//            }
+//        }
+//    }
 
     /**
      *Kiểm tra xem sản phẩm chọn mới đã có sản phẩm tương tự trong danh sách hay chưa
      *@author:NCPhuc
      *@date:3/18/2022
      **/
-    private fun checkSelectedProduct(id: Int): Boolean {
-        var isOK = false
-        for (i in productList) {
-            if (i.product.idVegetable == id) {
-                isOK = true
-            }
-        }
-        return isOK
-    }
+//    private fun checkSelectedProduct(id: Int): Boolean {
+//        var isOK = false
+//        for (i in productList) {
+//            if (i.product.id == id) {
+//                isOK = true
+//            }
+//        }
+//        return isOK
+//    }
 
     /**
      *Thiết lập filter
@@ -373,45 +372,51 @@ class SaleFragment : Fragment() {
         return FilterProduct(radioButtonText.toString(), spColor.idCategory)
     }
 
+    private fun refresh() {
+        binding.swipelayout.setOnRefreshListener {
+            getListVegetable()
+            binding.swipelayout.isRefreshing=false
+        }
+    }
     @SuppressLint("NotifyDataSetChanged")
     private fun filterProduct(filter: FilterProduct) {
-        var sortList = vegetables
+        var sortList = products
         if (filter.sortBy == "Tên") {
             if (filter.category == 0) {
                 sortList?.sortWith { t, t2 ->
                     Collator.getInstance(Locale("vi", "VN"))
-                        .compare(t.nameVegetable, t2.nameVegetable)
+                        .compare(t.product_name, t2.product_name)
                 }
             } else {
                 sortList?.sortWith { t, t2 ->
                     Collator.getInstance(Locale("vi", "VN"))
-                        .compare(t.nameVegetable, t2.nameVegetable)
+                        .compare(t.product_name, t2.product_name)
                 }
                 sortList =
-                    sortList?.filter { it.idCategory == filter.category } as ArrayList<Vegetable>?
+                    sortList?.filter { it.id == filter.category } as ArrayList<Product>?
             }
         } else {
             if (filter.category == 0) {
-                sortList?.sortWith(compareBy(Vegetable::price))
+                sortList?.sortWith(compareBy(Product::price))
             } else {
-                sortList?.sortWith(compareBy(Vegetable::price))
+                sortList?.sortWith(compareBy(Product::price))
                 sortList =
-                    sortList?.filter { it.idCategory == filter.category } as ArrayList<Vegetable>?
+                    sortList?.filter { it.id == filter.category } as ArrayList<Product>?
             }
         }
-        vegetableAdapter?.items = sortList!!
-        vegetableAdapter?.notifyDataSetChanged()
+        adapterProduct?.items = sortList!!
+        adapterProduct?.notifyDataSetChanged()
     }
 
     private fun getListVegetable() {
         val api = ApiHelper.getInstance().create(ApiInterface::class.java)
         CoroutineScope(IO).launch {
             try {
-                val response = api.getListVet()
+                val response = api.getListProduct()
                 if (response.isSuccessful && response.body() != null) {
                     withContext(Main) {
-                        vegetables = response.body() as ArrayList<Vegetable>?
-                        vegetables?.let { setUpView(it) }
+                        products = response.body() as ArrayList<Product>?
+                        products?.let { setUpView(it) }
                     }
                 } else {
                     activity?.showToast("Error : ${response.errorBody()}")

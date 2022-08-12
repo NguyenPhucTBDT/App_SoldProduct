@@ -9,7 +9,7 @@ import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.misa.fresher.R
-import com.misa.fresher.ShipInforModel
+import com.misa.fresher.viewmodel.ShipInforModel
 import com.misa.fresher.model.ShipInfor
 
 class RecipentFragment : Fragment() {

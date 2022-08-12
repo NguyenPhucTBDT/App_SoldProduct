@@ -12,8 +12,8 @@ interface ApiInterface {
     @POST("WSProduct/api/user/login")
     suspend fun signUp(@Body user: User): Response<Messenger>
 
-    @GET("WSProduct/api/vet/all")
-    suspend fun getListVet(): Response<List<Vegetable>>
+    @GET("WSLibrary/api/product/all")
+    suspend fun getListProduct(): Response<List<Product>>
 
     @GET("WSProduct/api/cate/all")
     suspend fun getListCate(): Response<List<Category>>

@@ -2,36 +2,30 @@ package com.misa.fresher.fragment
 
 import android.graphics.Color
 import android.os.Bundle
-import android.text.TextUtils
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.misa.fresher.BillViewModel
 import com.misa.fresher.R
 import com.misa.fresher.adapter.BillProductAdapter
 import com.misa.fresher.showToast
-import com.misa.fresher.data.bill.ImplBillDAO
-import com.misa.fresher.data.cart.ImplCartDAO
 import com.misa.fresher.databinding.FragmentBillDetailBinding
 import com.misa.fresher.model.*
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
-import com.misa.fresher.viewpager.UserViewModel
+import com.misa.fresher.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.DecimalFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
 class BillDetailFragment : Fragment() {
