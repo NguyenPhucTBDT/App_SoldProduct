@@ -26,7 +26,10 @@
         android:fitsSystemWindows="true"
         android:layout_gravity="start"
         android:id="@+id/nv_menu"
+        android:background="@drawable/bg_login_1"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/main_sale"
+        app:itemTextColor="@color/violet_dark"
+        app:itemTextAppearance="@style/CustomTextStyle"
         android:layout_height="match_parent"/>
 </androidx.drawerlayout.widget.DrawerLayout>
