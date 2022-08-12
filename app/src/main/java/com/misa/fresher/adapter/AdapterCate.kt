@@ -30,7 +30,7 @@ class AdapterCate(
         val view: TextView = convertView as TextView? ?: LayoutInflater.from(context)
             .inflate(layoutResource, parent, false) as TextView
         view.apply {
-            this.text = categories[position].nameCategory
+            this.text = categories[position].title
             this.setTextColor(resources.getColor( R.color.violet_dark))
         }
         return view

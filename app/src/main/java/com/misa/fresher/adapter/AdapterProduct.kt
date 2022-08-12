@@ -35,6 +35,7 @@ class AdapterProduct(
                 if (item.sale_price > 0) {
                     this.findViewById<TextView>(R.id.tv_sale_price).apply {
                         this.text = decimalFormat.format(item.sale_price).toString() + " ₫"
+                        this.visibility = View.VISIBLE
                     }
                     this.findViewById<TextView>(R.id.tv_price).apply {
                         this.text = decimalFormat.format(item.price).toString() + " ₫"
@@ -42,7 +43,9 @@ class AdapterProduct(
                         this.paintFlags = this.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                     }
                 } else {
-                    this.findViewById<TextView>(R.id.tv_sale_price).visibility = View.GONE
+                    this.findViewById<TextView>(R.id.tv_sale_price).apply {
+                        this.visibility = View.GONE
+                    }
                     this.findViewById<TextView>(R.id.tv_price).text =
                         decimalFormat.format(item.price).toString() + " ₫"
                 }

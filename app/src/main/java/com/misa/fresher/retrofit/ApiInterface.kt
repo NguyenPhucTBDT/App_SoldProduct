@@ -15,7 +15,7 @@ interface ApiInterface {
     @GET("WSLibrary/api/product/all")
     suspend fun getListProduct(): Response<List<Product>>
 
-    @GET("WSProduct/api/cate/all")
+    @GET("WSLibrary/api/category/all")
     suspend fun getListCate(): Response<List<Category>>
 
     @Headers("Content-Type: application/json")

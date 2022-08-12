@@ -369,7 +369,7 @@ class SaleFragment : Fragment() {
         val selectRadioButton = view.findViewById<RadioGroup>(R.id.rgSortby).checkedRadioButtonId
         val radioButtonText = selectRadioButton.let { view.findViewById<RadioButton>(it)?.text }
         val spColor = view.findViewById<Spinner>(R.id.spnColor).selectedItem as Category
-        return FilterProduct(radioButtonText.toString(), spColor.idCategory)
+        return FilterProduct(radioButtonText.toString(), spColor.id)
     }
 
     private fun refresh() {
