@@ -3,38 +3,72 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/border.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/border_button.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/custom_tablayout.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/ic_baseline_arrow_back_ios_24.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/ic_baseline_calendar_month_24.xml" value="0.2638888888888889" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/ic_baseline_qr_code_scanner_24.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/ic_baseline_refresh_24.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/ic_baseline_shopping_cart_24.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/ic_user.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/drawable/tab_layout_border.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/layout/activity_main.xml" value="0.264" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/layout/activity_view_pager.xml" value="0.14375" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/layout/activity_viewpager.xml" value="0.14375" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/layout/fragment_first.xml" value="0.14375" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/layout/fragment_fist.xml" value="0.2" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/layout/fragment_second.xml" value="0.14375" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/layout/fragment_third.xml" value="0.27355072463768115" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/layout/item_layout.xml" value="0.13171225937183384" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15989583333333332" />
-        <entry key="..\:/Users/Twin/fresher/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.22314814814814815" />
+        <entry key="..\:/Users/Twin/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_dropdown_item.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/Twin/AppData/Local/Android/Sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.18489583333333334" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/border_bottom_sheet.xml" value="0.129" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/border_button.xml" value="0.129" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/border_button_bottomsheet.xml" value="0.129" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/border_delivery.xml" value="0.129" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/border_img.xml" value="0.129" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/border_img_search.xml" value="0.129" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/border_layout.xml" value="0.129" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/border_left_corner.xml" value="0.129" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/border_right_corner.xml" value="0.22" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/border_right_corner_1.xml" value="0.22" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/border_right_corner_3.xml" value="0.1" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/custom_background_login.xml" value="0.124" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/custom_tablayout.xml" value="0.18796296296296297" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/ic_arrow_left.xml" value="0.1" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.1415" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/ic_baseline_lock_open_24.xml" value="0.1265" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/ic_baseline_phone_24.xml" value="0.1415" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/ic_dollar_sign.xml" value="0.1275" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/ic_log_out.xml" value="0.1" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/ic_map_pin.xml" value="0.1" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/ic_order.xml" value="0.1" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/tab_layout_border.xml" value="0.18796296296296297" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/tab_selected_left.xml" value="0.2869791666666667" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/tab_selected_mid.xml" value="0.18796296296296297" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/tab_selected_right.xml" value="0.15092592592592594" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/textview_amount_border.xml" value="0.1" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/textview_totalprice_border.xml" value="0.1" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/drawable/tv_list_bill_border.xml" value="0.2869791666666667" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/activity_login.xml" value="0.23508771929824562" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/activity_main2.xml" value="0.23802083333333332" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/cart_item_layout.xml" value="0.2" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/context_main.xml" value="0.25" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/custom.xml" value="0.23802083333333332" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_address_user.xml" value="0.23802083333333332" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_bill_detail.xml" value="0.23902439024390243" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_filter.xml" value="0.2708333333333333" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_fist.xml" value="0.2708333333333333" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_list_bills.xml" value="0.42828282828282827" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_oder.xml" value="0.23802083333333332" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_oder_detail.xml" value="0.1" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_package.xml" value="0.2708333333333333" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_product_detail.xml" value="0.2" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_receiver.xml" value="0.4" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_sale.xml" value="0.16" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_shipping.xml" value="0.2708333333333333" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_shipping_infor.xml" value="0.2708333333333333" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/fragment_shopping_cart.xml" value="0.23802083333333332" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/item_address_layout.xml" value="0.2328125" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/item_toolbar.xml" value="0.1" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/layout_bottom_sheet.xml" value="0.1678082191780822" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/layout_item_bill.xml" value="0.264" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/layout_item_product.xml" value="0.264" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/list_bill_item_layout.xml" value="0.13020833333333334" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/nav_header.xml" value="0.23802083333333332" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/navigation_view.xml" value="0.12552083333333333" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/oder_item_layout.xml" value="0.23697916666666666" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/product_item_layout.xml" value="0.21240942028985507" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/layout/shopping_cart_item_layout.xml" value="0.23697916666666666" />
+        <entry key="..\:/fresher/fresher/app/src/main/res/menu/main_sale.xml" value="0.23802083333333332" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
-  </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>

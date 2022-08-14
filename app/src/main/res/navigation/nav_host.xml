@@ -27,6 +27,12 @@
         <action
             android:id="@+id/action_saleFragment_to_shoppingCartFragment"
             app:destination="@id/shoppingCartFragment" />
+        <action
+            android:id="@+id/action_saleFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_saleFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/shippingInforFragment"
@@ -80,6 +86,9 @@
         <action
             android:id="@+id/action_shoppingCartFragment_to_addressUserFragment"
             app:destination="@id/addressUserFragment" />
+        <action
+            android:id="@+id/action_shoppingCartFragment_to_oderFragment"
+            app:destination="@id/oderFragment" />
     </fragment>
     <fragment
         android:id="@+id/addressUserFragment"
@@ -95,4 +104,31 @@
         android:name="com.misa.fresher.fragment.OderDetailFragment"
         android:label="fragment_oder_detail"
         tools:layout="@layout/fragment_oder_detail" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.misa.fresher.login.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_saleFragment"
+            app:popUpTo="@+id/saleFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/saleFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signUpActivity"
+            app:destination="@id/signUpActivity" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpActivity"
+        android:name="com.misa.fresher.signup.SignUpFragment"
+        android:label="SignUpActivity" />
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.misa.fresher.fragment.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" />
+    <fragment
+        android:id="@+id/oderFragment"
+        android:name="com.misa.fresher.fragment.OderFragment"
+        android:label="fragment_oder"
+        tools:layout="@layout/fragment_oder" />
 </navigation>

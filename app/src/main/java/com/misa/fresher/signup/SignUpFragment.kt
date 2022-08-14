@@ -7,37 +7,41 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Patterns
 import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import com.misa.fresher.databinding.ActivitySignUpBinding
-import com.misa.fresher.login.LoginActivity
-import com.misa.fresher.login.LoginPresenter
 import com.misa.fresher.login.LoginTest
 import com.misa.fresher.model.User
-import com.misa.fresher.retrofit.ApiHelper
-import com.misa.fresher.retrofit.ApiInterface
 import com.misa.fresher.showToast
-import kotlinx.coroutines.*
-import java.lang.Exception
 
-class SignUpActivity : AppCompatActivity(), SignUpContract.View {
+class SignUpFragment : Fragment(), SignUpContract.View {
     private val binding: ActivitySignUpBinding by lazy { getInflater(layoutInflater) }
     val getInflater: (LayoutInflater) -> ActivitySignUpBinding
         get() = ActivitySignUpBinding::inflate
-    private var mSignUpPresenter: SignUpPresenter? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    private var mSignUpPresenter : SignUpPresenter ?= null
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initPresenter()
         binding.btnSignUp.setOnClickListener {
             checkValid()
         }
         binding.tvLogin.setOnClickListener {
-            onBackPressed()
+            activity?.onBackPressed()
         }
     }
+
 
     /**
      *Đăng ký tài khoản mới
@@ -50,20 +54,19 @@ class SignUpActivity : AppCompatActivity(), SignUpContract.View {
         val rePass = binding.tietReEnterPassword.text.toString()
         val fullName = binding.tietFullName.text.toString()
         if (user.isEmpty()) {
-            application.showToast("Tài khoản không được để trống!")
+            activity?.showToast("Tài khoản không được để trống!")
         } else if (pass.isEmpty()) {
-            application.showToast("Mật khẩu không được bỏ trống!")
+            activity?.showToast("Mật khẩu không được bỏ trống!")
         } else if (rePass.isEmpty()) {
-            application.showToast("Mật khẩu nhập lại không được bỏ trống!")
+            activity?.showToast("Mật khẩu nhập lại không được bỏ trống!")
         } else if (pass != rePass) {
-            application.showToast("Mật khẩu không khớp nhau!")
+            activity?.showToast("Mật khẩu không khớp nhau!")
         } else if (fullName.isEmpty()) {
-            application.showToast("Họ và tên không được bỏ trống!")
-        }
-        else if (!checkForInternet(this)) {
-            application.showToast("Không có kết nối mạng")
+            activity?.showToast("Họ và tên không được bỏ trống!")
+        } else if (!checkForInternet(requireContext())) {
+            activity?.showToast("Không có kết nối mạng")
         } else {
-            val userInfor = User(0,user, pass,fullName)
+            val userInfor = User(0, user, pass, fullName, "", "")
             binding.flProgressBar.isVisible = true
             mSignUpPresenter?.signUp(userInfor)
         }
@@ -105,9 +108,7 @@ class SignUpActivity : AppCompatActivity(), SignUpContract.View {
     }
 
     override fun signUpSuccess() {
-        val intent = Intent(this, LoginTest::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
+        activity?.onBackPressed()
     }
 
     override fun showProgressBar() {
@@ -115,7 +116,7 @@ class SignUpActivity : AppCompatActivity(), SignUpContract.View {
     }
 
     override fun showErrorMessage(string: String) {
-        application?.showToast(string)
+        activity?.showToast(string)
     }
 
     override fun onDestroy() {

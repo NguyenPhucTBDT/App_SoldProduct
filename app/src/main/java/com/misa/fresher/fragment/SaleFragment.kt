@@ -9,12 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -24,7 +26,7 @@ import com.misa.fresher.R
 import com.misa.fresher.adapter.AdapterCate
 import com.misa.fresher.adapter.AdapterProduct
 import com.misa.fresher.databinding.FragmentSaleBinding
-import com.misa.fresher.login.LoginActivity
+import com.misa.fresher.login.LoginFragment
 import com.misa.fresher.model.*
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
@@ -36,17 +38,16 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.Collator
-import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
 class SaleFragment : Fragment() {
     private val binding: FragmentSaleBinding by lazy { FragmentSaleBinding.inflate(layoutInflater) }
     var products: ArrayList<Product>? = null
+    var idU: Int? = 0
     val viewModel: UserViewModel by activityViewModels()
     private var categories: ArrayList<Category>? = null
     var adapterProduct: AdapterProduct? = null
-    private val decimalFormat = DecimalFormat("0,000.0")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,12 +60,10 @@ class SaleFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         getListVegetable()
         searchProduct(view)
-        clearProduct()
-        //showBillFragment()
-        //updateView()
         configFilter(view)
         getListVegetable()
         refresh()
+        initView()
     }
 
     /**
@@ -75,12 +74,24 @@ class SaleFragment : Fragment() {
     private fun setUpView(vet: List<Product>) {
         adapterProduct =
             AdapterProduct(vet as ArrayList<Product>) {
-//                showBottomDialog(it)
+                showBottomDialog(it)
             }
         binding.rcvProduct.adapter = adapterProduct
-        binding.rcvProduct.layoutManager = GridLayoutManager(requireContext(),2)
+        binding.rcvProduct.layoutManager = GridLayoutManager(requireContext(), 2)
         setUpNavigation()
         openDrawerLayoutMenu()
+
+    }
+
+    private fun initView() {
+        val idU = arguments?.getInt("id")
+        val name = arguments?.getString("name")
+        val phone = arguments?.getString("phone")
+        val email = arguments?.getString("email")
+        if (idU != null && name != null && phone != null && email != null) {
+            (activity as MainActivity).initView(name)
+            viewModel.addUser(User(idU, "", "", name, phone, email))
+        }
     }
 
     /**
@@ -114,56 +125,10 @@ class SaleFragment : Fragment() {
      *@date:3/16/2022
      **/
     private fun showBottomDialog(product: Product) {
-        val bottomSheetDialog =
-            BottomSheetDialog(requireContext(), R.style.AppBottomSheetDialogTheme)
-        val bottomSheetView: View =
-            LayoutInflater.from(requireContext())
-                .inflate(R.layout.layout_bottom_sheet, view as DrawerLayout, false)
-        bottomSheetDialog.setContentView(bottomSheetView)
-        bottomSheetDialog.findViewById<TextView>(R.id.tvName)!!.text = product.product_name
-        bottomSheetDialog.findViewById<TextView>(R.id.tvSKU)!!.text = product.price.toString()
-        bottomSheetDialog.show()
-        val tvAmount =
-            bottomSheetView.findViewById<TextView>(R.id.tvAmount)
-        val btnAdd = bottomSheetDialog.findViewById<ImageButton>(R.id.btnAdd)
-        val btnSubtract = bottomSheetView.findViewById<ImageButton>(R.id.btnSubtract)
-        var amount = tvAmount.text.toString().toInt()
-        btnAdd?.setOnClickListener {
-            amount += 1
-            tvAmount.text = amount.toString()
-        }
-        btnSubtract.setOnClickListener {
-            if (amount > 1) {
-                amount -= 1
-                tvAmount.text = amount.toString()
-            } else {
-                activity?.showToast(this.getString(R.string.message_quantity))
-            }
-        }
-//        bottomSheetDialog.findViewById<Button>(R.id.btn_buy_now)?.setOnClickListener {
-//            if (checkSelectedProduct(vegetable.idVegetable)) {
-//                for (i in productList) {
-//                    if (i.product.idVegetable == vegetable.idVegetable) {
-//                        i.amount = i.amount + amount
-//                    }
-//                }
-//            } else {
-//                productList.add(SelectedProduct(vegetable, amount))
-//            }
-//            updateView()
-//            bottomSheetDialog.dismiss()
-//        }
-//        bottomSheetDialog.findViewById<Button>(R.id.btn_add_cart)?.setOnClickListener {
-//            val shoppingCart = ShoppingCart(
-//                vegetable.idVegetable,
-//                vegetable.nameVegetable.toString(), amount, vegetable.price
-//            )
-//            viewModel.customer.observe(viewLifecycleOwner, Observer<UserRespone> {
-//                addCart(shoppingCart, it.id)
-//                bottomSheetDialog.dismiss()
-//            })
-//
-//        }
+        findNavController().navigate(
+            R.id.action_saleFragment_to_productDetailFragment,
+            bundleOf(Pair("product_id", product.product_id))
+        )
     }
 
     /**
@@ -186,7 +151,7 @@ class SaleFragment : Fragment() {
     private fun updateList(strSearch: String) {
         val productSearch = mutableListOf<Product>()
         for (i in products!!) {
-            if (i.product_name?.lowercase()?.contains(strSearch.lowercase())!!) {
+            if (i.product_name.lowercase().contains(strSearch.lowercase())) {
                 productSearch.add(i)
             }
         }
@@ -194,56 +159,6 @@ class SaleFragment : Fragment() {
             AdapterProduct(productSearch as ArrayList<Product>) { showBottomDialog(it) }
         binding.rcvProduct.adapter = adapterProduct
     }
-
-    /**
-     *Xóa hết các sản phẩm có trong danh sách chọn mua
-     *@author:NCPhuc
-     *@date:3/16/2022
-     **/
-    private fun clearProduct() {
-        binding.ivRefresh.setOnClickListener {
-            binding.tvProductAmount.let {
-                it.text = "0"
-                it.setTextColor(Color.BLACK)
-                it.setBackgroundResource(R.drawable.border_left_corner)
-            }
-            binding.tvTotalPrice.let {
-                it.text = ""
-                it.setTextColor(Color.BLACK)
-                it.setBackgroundResource(R.drawable.border_right_corner)
-            }
-            binding.llRefresh.setBackgroundResource(R.drawable.border_button)
-            binding.ivRefresh.setBackgroundResource(R.drawable.border_button)
-            //productList.clear()
-        }
-    }
-
-    /**
-     *Cập nhật lại UI khi chọn sản phẩm ở bottomDialog
-     *@author:NCPhuc
-     *@date:3/16/2022
-     **/
-    @SuppressLint("SetTextI18n")
-//    private fun updateView() {
-//        if (productList.size > 0) {
-//            binding.tvProductAmount.let { view ->
-//                view.text = productList.sumOf { it.amount }.toString()
-//                view.setTextColor(Color.WHITE)
-//                view.setBackgroundResource(R.drawable.textview_amount_border)
-//            }
-//            binding.tvTotalPrice.let { view ->
-//                view.text =
-//                    context?.getText(R.string.all).toString() + " " + decimalFormat.format(
-//                        productList.sumOf { it.amount * it.product.price.toDouble() }
-//                    )
-//                        .toString()
-//                view.setTextColor(Color.WHITE)
-//                view.setBackgroundResource(R.drawable.textview_totalprice_border)
-//            }
-//            binding.ivRefresh.setBackgroundResource(R.drawable.linearlayout_refresh_border)
-//            binding.llRefresh.setBackgroundResource(R.drawable.linearlayout_refresh_border)
-//        }
-//    }
 
     /**
      *Mở navigationView ở phía bên trái của màn hình
@@ -264,7 +179,13 @@ class SaleFragment : Fragment() {
     private fun setUpNavigation() {
         val navigationView = (activity as MainActivity).findViewById<NavigationView>(R.id.nv_menu)
         val drawerLayout = (activity as MainActivity).findViewById<DrawerLayout>(R.id.dlLeft)
-        navigationView?.setNavigationItemSelectedListener {
+        val headerView = navigationView.getHeaderView(0)
+        val tvLogin = headerView.findViewById<TextView>(R.id.tv_login)
+        tvLogin.setOnClickListener {
+            drawerLayout.closeDrawer(GravityCompat.START)
+            findNavController().navigate(R.id.action_saleFragment_to_loginFragment)
+        }
+        navigationView?.setNavigationItemSelectedListener { it ->
             when (it.itemId) {
                 R.id.mnBill -> {
                     findNavController().navigate(
@@ -279,56 +200,20 @@ class SaleFragment : Fragment() {
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.mnLogOut -> {
-                    val intent = Intent(requireContext(), LoginActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    (activity as MainActivity).startActivity(intent)
+                    var isLogin = false
+                    viewModel.customer.observe(viewLifecycleOwner) { user ->
+                        drawerLayout.closeDrawer(GravityCompat.START)
+                        findNavController().navigate(R.id.action_saleFragment_to_loginFragment)
+                        isLogin = true
+                    }
+                    if (!isLogin) {
+                        activity?.showToast("Vui lòng đăng nhập")
+                    }
                 }
             }
             true
         }
     }
-
-    /**
-     *Chuyển sang BillFragment
-     *@author:NCPhuc
-     *@date:3/16/2022
-     **/
-//    private fun showBillFragment() {
-//        val drawerLayout = (activity as MainActivity).findViewById<DrawerLayout>(R.id.dlLeft)
-//        binding.tvProductAmount.setOnClickListener {
-//            drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
-//            if (productList.size > 0) {
-//                findNavController().navigate(
-//                    R.id.action_saleFragment_to_billDetailFragment,
-//                    bundleOf("product" to productList)
-//                )
-//            }
-//        }
-//        binding.tvTotalPrice.setOnClickListener {
-//            drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
-//            if (productList.size > 0) {
-//                findNavController().navigate(
-//                    R.id.action_saleFragment_to_billDetailFragment,
-//                    bundleOf("product" to productList)
-//                )
-//            }
-//        }
-//    }
-
-    /**
-     *Kiểm tra xem sản phẩm chọn mới đã có sản phẩm tương tự trong danh sách hay chưa
-     *@author:NCPhuc
-     *@date:3/18/2022
-     **/
-//    private fun checkSelectedProduct(id: Int): Boolean {
-//        var isOK = false
-//        for (i in productList) {
-//            if (i.product.id == id) {
-//                isOK = true
-//            }
-//        }
-//        return isOK
-//    }
 
     /**
      *Thiết lập filter
@@ -375,9 +260,10 @@ class SaleFragment : Fragment() {
     private fun refresh() {
         binding.swipelayout.setOnRefreshListener {
             getListVegetable()
-            binding.swipelayout.isRefreshing=false
+            binding.swipelayout.isRefreshing = false
         }
     }
+
     @SuppressLint("NotifyDataSetChanged")
     private fun filterProduct(filter: FilterProduct) {
         var sortList = products
@@ -446,26 +332,5 @@ class SaleFragment : Fragment() {
         }
     }
 
-    private fun addCart(shoppingCart: ShoppingCart, idU: Int) {
-        val api = ApiHelper.getInstance().create(ApiInterface::class.java)
-        CoroutineScope(IO).launch {
-            try {
-                val response = api.insertShoppingCart(shoppingCart, idU)
-                if (response.isSuccessful && response.body() != null) {
-                    withContext(Main) {
-                        if (response.body()!!.id == 100) {
-                            activity?.showToast("Thêm vào giỏ hàng thành công")
-                        } else {
-                            activity?.showToast("Thêm vào giỏ hàng thất bại")
-                        }
-                    }
-                } else {
-                    activity?.showToast("Error : ${response.errorBody()}")
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-    }
 }
 

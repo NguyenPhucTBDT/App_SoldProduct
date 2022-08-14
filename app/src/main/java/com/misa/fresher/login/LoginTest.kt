@@ -12,7 +12,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
-import com.misa.fresher.signup.SignUpActivity
+import com.misa.fresher.signup.SignUpFragment
 import com.misa.fresher.databinding.ActivityLoginBinding
 import com.misa.fresher.model.User
 import com.misa.fresher.showToast
@@ -33,7 +33,7 @@ class LoginTest : AppCompatActivity(), LoginContract.View {
             checkValid()
         }
         binding.tvSignUp.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
+            val intent = Intent(this, SignUpFragment::class.java)
             startActivity(intent)
         }
     }
@@ -58,7 +58,7 @@ class LoginTest : AppCompatActivity(), LoginContract.View {
     }
 
     private fun checkValid() {
-        val user = User(0,binding.tietUsername.text.toString(), binding.tietPassword.text.toString(),"")
+        val user = User(0,binding.tietUsername.text.toString(), binding.tietPassword.text.toString(),"","","")
         if (binding.tietUsername.text.toString().isEmpty() || binding.tietPassword.text.toString()
                 .isEmpty()
         ) {

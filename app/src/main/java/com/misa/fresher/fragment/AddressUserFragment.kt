@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.adapter.AdapterAddress
 import com.misa.fresher.databinding.FragmentBillDetailBinding
 import com.misa.fresher.model.AddressUser
+import com.misa.fresher.model.User
 import com.misa.fresher.model.UserRespone
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
@@ -64,10 +65,10 @@ class AddressUserFragment : Fragment() {
 
     private fun getListAddress() {
         val api = ApiHelper.getInstance().create(ApiInterface::class.java)
-        viewModel.customer.observe(viewLifecycleOwner, Observer<UserRespone> {
+        viewModel.customer.observe(viewLifecycleOwner, Observer<User> {
             CoroutineScope(IO).launch {
                 Log.e("idU:", idU.toString())
-                val response = api.getListAddress(it.id)
+                val response = api.getListAddress(it.idU)
                 try {
                     if (response.isSuccessful && response.body() != null) {
                         withContext(Main) {

@@ -33,6 +33,7 @@
             android:textColor="@color/white" />
 
         <ImageButton
+            android:visibility="gone"
             android:id="@+id/imb_cart"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -42,6 +43,7 @@
             android:src="@drawable/ic_baseline_shopping_cart_24" />
 
         <ImageButton
+            android:visibility="gone"
             android:id="@+id/img_more"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -51,6 +53,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:visibility="gone"
         android:background="@color/white"
         android:id="@+id/layout_cus"
         android:layout_width="match_parent"
@@ -103,6 +106,7 @@
     </LinearLayout>
 
     <View
+        android:visibility="gone"
         android:id="@+id/vSpace"
         android:layout_width="match_parent"
         android:layout_height="@dimen/d5"
@@ -129,7 +133,7 @@
             android:textSize="@dimen/ts16" />
 
         <ImageButton
-
+            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
@@ -138,12 +142,13 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:padding="@dimen/de10"
         android:id="@+id/rvSelectedProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:layout_above="@id/llTotal"
-        android:layout_below="@id/llBuyMore" />
+        android:layout_below="@id/llBuyMore"
+        android:padding="@dimen/de10" />
 
     <LinearLayout
         android:background="@color/white"
@@ -153,6 +158,7 @@
         android:layout_alignParentBottom="true">
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="@dimen/d50"
             android:layout_height="@dimen/d50"
             android:layout_gravity="center_vertical"
@@ -168,6 +174,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="@dimen/d50"
             android:layout_height="@dimen/d50"
             android:layout_gravity="center_vertical"
@@ -186,6 +193,7 @@
             android:layout_width="45dp"
             android:layout_height="@dimen/d50"
             android:layout_gravity="center"
+            android:layout_marginStart="@dimen/d5"
             android:layout_marginTop="@dimen/d5"
             android:layout_marginEnd="@dimen/d1"
             android:layout_marginBottom="@dimen/d5"
@@ -200,7 +208,7 @@
             android:layout_height="@dimen/d50"
             android:layout_gravity="center"
             android:layout_marginEnd="@dimen/de10"
-            android:background="@drawable/border_right_corner"
+            android:background="@drawable/border_right_corner_3"
             android:gravity="center"
             android:hint="@string/not_select"
             android:textSize="@dimen/ts16" />
@@ -238,18 +246,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:gravity="right|center"
+            android:gravity="center"
             android:text="0,0"
             android:textColor="@color/black"
             android:textSize="@dimen/ts16" />
-
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/d5"
-            android:layout_marginBottom="@dimen/d5"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:src="@drawable/ic_baseline_arrow_forward_ios_24" />
     </LinearLayout>
 </RelativeLayout>

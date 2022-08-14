@@ -1,22 +1,24 @@
 package com.misa.fresher.login
 
 import android.content.Context
-import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.misa.fresher.MainActivity
+import androidx.navigation.fragment.findNavController
+import com.misa.fresher.R
 import com.misa.fresher.databinding.ActivityLoginBinding
 import com.misa.fresher.model.User
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
 import com.misa.fresher.showToast
-import com.misa.fresher.signup.SignUpActivity
 import com.misa.fresher.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,23 +28,29 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
-class LoginActivity : AppCompatActivity() {
+class LoginFragment : Fragment() {
     private val binding: ActivityLoginBinding by lazy { getInflater(layoutInflater) }
     val getInflater: (LayoutInflater) -> ActivityLoginBinding
         get() = ActivityLoginBinding::inflate
     var viewModel: UserViewModel? = null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            signIn(intent)
+            signIn()
         }
         binding.tvSignUp.setOnClickListener {
-            val intent = Intent(this, SignUpActivity::class.java)
-            startActivity(intent)
+            findNavController().navigate(
+                R.id.action_loginFragment_to_signUpActivity
+            )
         }
     }
 
@@ -51,15 +59,22 @@ class LoginActivity : AppCompatActivity() {
      *@author:NCPhuc
      *@date:3/22/2022
      **/
-    private fun signIn(intent: Intent) {
-        val user = User(0,binding.tietUsername.text.toString(), binding.tietPassword.text.toString(),"")
+    private fun signIn() {
+        val user = User(
+            0,
+            binding.tietUsername.text.toString(),
+            binding.tietPassword.text.toString(),
+            "",
+            "",
+            ""
+        )
         val resIn = ApiHelper.getInstance().create(ApiInterface::class.java)
         if (binding.tietUsername.text.toString().isEmpty() || binding.tietPassword.text.toString()
                 .isEmpty()
         ) {
-            application.showToast("Tài khoản/mật khẩu không được để trống!")
-        } else if (!checkForInternet(this)) {
-            application.showToast("Không có kết nối mạng!")
+            activity?.showToast("Tài khoản/mật khẩu không được để trống!")
+        } else if (!checkForInternet(requireContext())) {
+            activity?.showToast("Không có kết nối mạng!")
         } else {
             binding.flProgessBarSignIn.isVisible = true
             CoroutineScope(IO).launch {
@@ -67,26 +82,28 @@ class LoginActivity : AppCompatActivity() {
                     val signIn = resIn.signIn(user)
                     if (signIn.isSuccessful && signIn.body() != null) {
                         withContext(Main) {
-                            if (signIn.body()!!.id != 105) {
-                                intent.putExtra("idU", signIn.body()!!.id)
-                                intent.putExtra("fullname", signIn.body()!!.fullname)
-                                intent.putExtra("account", signIn.body()!!.account)
-                                intent.putExtra("password", signIn.body()!!.password)
-                                startActivity(intent)
+                            val body = signIn.body()
+                            if (signIn.code() == 200) {
+                                findNavController().navigate(
+                                    R.id.action_loginFragment_to_saleFragment, bundleOf(
+                                        Pair("id", body!!.idU), Pair("name", body.fullname),Pair("phone",body.phone),
+                                        Pair("email",body.email)
+                                    )
+                                )
                             } else {
-                                application.showToast("Thông tin tài khoản không chính xác")
+                                activity?.showToast("Thông tin tài khoản không chính xác")
                                 binding.flProgessBarSignIn.isVisible = false
                             }
                         }
                     } else {
                         withContext(Dispatchers.Main) {
-                            application.showToast(signIn.errorBody().toString())
+                            activity?.showToast(signIn.errorBody().toString())
                             binding.flProgessBarSignIn.isVisible = false
                         }
                     }
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
-                        application.showToast(e.message.toString())
+                        activity?.showToast(e.message.toString())
                         binding.flProgessBarSignIn.isVisible = false
                     }
                 }

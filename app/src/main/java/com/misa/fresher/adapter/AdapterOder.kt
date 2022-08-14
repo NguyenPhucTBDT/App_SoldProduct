@@ -1,42 +1,37 @@
 package com.misa.fresher.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.misa.fresher.databinding.CartItemLayoutBinding
+import com.misa.fresher.databinding.OderItemLayoutBinding
 import com.misa.fresher.model.Cart
-import com.misa.fresher.model.ShoppingCart
 import com.squareup.picasso.Picasso
 import java.text.DecimalFormat
 
-class AdapterShoppingCart(
-    private val mListShoppingCart: ArrayList<Cart>, val mCtx: Context,
-    val updateView: (product: Cart) -> Unit
-) : RecyclerView.Adapter<AdapterShoppingCart.ViewHolder>() {
-    inner class ViewHolder(binding: CartItemLayoutBinding) :
+class AdapterOder(
+    private val mListShoppingCart: ArrayList<Cart>
+) : RecyclerView.Adapter<AdapterOder.ViewHolder>() {
+    inner class ViewHolder(binding: OderItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private val title = binding.tvTitle
+        private val title = binding.tvProductName
         private val quantity = binding.tvQuantity
         private val price = binding.tvPrice
         private val img = binding.imgProduct
-        private val tvDelete = binding.tvDelete
         private val decimalFormat = DecimalFormat("0,000.0")
         fun bind(product: Cart) {
             Picasso.get().load(product.imglink).into(img)
             title.text = product.title
             quantity.text = product.quantity.toString()
             price.text = decimalFormat.format(product.price) + " ₫"
-            tvDelete.setOnClickListener { updateView(product) }
         }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): AdapterShoppingCart.ViewHolder {
-        val binding: CartItemLayoutBinding by lazy {
-            CartItemLayoutBinding.inflate(
+    ): AdapterOder.ViewHolder {
+        val binding: OderItemLayoutBinding by lazy {
+            OderItemLayoutBinding.inflate(
                 LayoutInflater.from(parent.context)
             )
         }

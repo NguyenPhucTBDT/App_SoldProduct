@@ -12,10 +12,10 @@
         android:theme="@style/Theme.FreshersApplication"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".signup.SignUpActivity"
+            android:name=".signup.SignUpFragment"
             android:exported="true" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name=".login.LoginFragment"
             android:exported="true">
 
         </activity>

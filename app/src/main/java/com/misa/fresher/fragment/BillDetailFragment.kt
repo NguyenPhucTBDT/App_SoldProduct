@@ -163,8 +163,8 @@ class BillDetailFragment : Fragment() {
     private fun oderProduct(address: AddressUser) {
         val api = ApiHelper.getInstance().create(ApiInterface::class.java)
         viewModel.customer.observe(viewLifecycleOwner,
-            Observer<UserRespone> {
-                idU = it.id
+            Observer<User> {
+                idU = it.idU
             })
         CoroutineScope(IO).launch {
             val amount = listBillDetail.sumOf { it.product.price.toDouble() * it.amount }
@@ -181,27 +181,27 @@ class BillDetailFragment : Fragment() {
                     )
                 )
             }
-            val cart =
-                Cart(idU!!, address.address, address.phone, amount.toFloat(), list)
-            try {
-                val response = api.oderProduct(cart)
-                if (response.isSuccessful && response.body() != null) {
-                    if (response.body()!!.id == 200) {
-                        withContext(Main) {
-                            activity?.showToast("Đơn hàng được tạo thành công")
-                            findNavController().navigate(R.id.action_billDetailFragment_to_saleFragment)
-                        }
-                    } else {
-                        withContext(Main) {
-                            activity?.showToast("Đơn hàng được tạo không thành công")
-                        }
-                    }
-                } else {
-                    Log.e("errr", response.errorBody().toString())
-                }
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
+//            val cart =
+//                Cart(idU!!, address.address, address.phone, amount.toFloat(), list)
+//            try {
+//                val response = api.oderProduct(cart)
+//                if (response.isSuccessful && response.body() != null) {
+//                    if (response.body()!!.id == 200) {
+//                        withContext(Main) {
+//                            activity?.showToast("Đơn hàng được tạo thành công")
+//                            findNavController().navigate(R.id.action_billDetailFragment_to_saleFragment)
+//                        }
+//                    } else {
+//                        withContext(Main) {
+//                            activity?.showToast("Đơn hàng được tạo không thành công")
+//                        }
+//                    }
+//                } else {
+//                    Log.e("errr", response.errorBody().toString())
+//                }
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//            }
         }
     }
 

@@ -20,8 +20,9 @@ import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.ListBillAdapter
 import com.misa.fresher.databinding.FragmentListBillsBinding
-import com.misa.fresher.login.LoginActivity
+import com.misa.fresher.login.LoginFragment
 import com.misa.fresher.model.Invoice
+import com.misa.fresher.model.User
 import com.misa.fresher.model.UserRespone
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
@@ -53,8 +54,8 @@ class ListBillsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.customer.observe(viewLifecycleOwner, Observer<UserRespone> {
-            getListInvoice(it.id)
+        viewModel.customer.observe(viewLifecycleOwner, Observer<User> {
+            getListInvoice(it.idU)
         })
         setUpView()
         openDrawerLayoutMenu(view)
@@ -125,7 +126,7 @@ class ListBillsFragment : Fragment() {
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.mnLogOut -> {
-                    val intent = Intent(requireContext(), LoginActivity::class.java)
+                    val intent = Intent(requireContext(), LoginFragment::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                     (activity as MainActivity).startActivity(intent)
                 }

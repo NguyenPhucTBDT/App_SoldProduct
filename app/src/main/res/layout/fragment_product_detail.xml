@@ -1,13 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragment.ProductDetailFragment">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/llToolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/violet_dark"
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/ibBack"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/violet_dark"
+            android:src="@drawable/ic_arrow_left" />
+
+        <TextView
+            android:id="@+id/tvBillCode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:text="Thông tin sản phẩm"
+            android:textColor="@color/white"
+            android:textSize="@dimen/ts16" />
+
+        <ImageButton
+            android:id="@+id/imb_cart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/violet_dark"
+            android:contentDescription="@string/none"
+            android:src="@drawable/ic_baseline_shopping_cart_24"
+            android:visibility="gone" />
+
+        <ImageButton
+            android:id="@+id/img_more"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/violet_dark"
+            android:src="@drawable/ic_baseline_more_vert_24"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/llBottomToolbar"
+        android:layout_below="@id/llToolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="@dimen/de10">
+
+            <ImageView
+                android:id="@+id/img_product"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent" />
+
+            <TextView
+                android:id="@+id/tv_productName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/d5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/ts20"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Giá bán:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/ts20"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/ts20" />
+
+                <TextView
+                    android:id="@+id/tv_sale_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/ts20" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/d30"
+                    android:text="Số lượng : "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/ts20"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/btnSubtract"
+                    android:layout_width="@dimen/d30"
+                    android:layout_height="@dimen/d30"
+                    android:background="@drawable/border_button_bottomsheet"
+                    android:src="@drawable/ic_subtract"
+                    android:text="-"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/ts16" />
+
+                <TextView
+                    android:id="@+id/tvAmount"
+                    android:layout_width="@dimen/d30"
+                    android:layout_height="@dimen/d30"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textSize="@dimen/ts16" />
+
+                <ImageButton
+                    android:id="@+id/btnAdd"
+                    android:layout_width="@dimen/d30"
+                    android:layout_height="@dimen/d30"
+                    android:background="@drawable/border_button_bottomsheet"
+                    android:gravity="center"
+                    android:src="@drawable/ic_baseline_add_24"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/ts16"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_manufacture"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/d5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/ts20"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mô tả:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/ts20"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/d5"
+                android:textColor="@color/black"
+                android:textSize="@dimen/ts20" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/llBottomToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="@dimen/de10"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_buyNow"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/d50"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/d5"
+            android:layout_weight="1"
+            android:background="@drawable/border_right_corner"
+            android:gravity="center"
+            android:text="Mua ngay"
+            android:textColor="@color/white"
+            android:textSize="@dimen/ts16" />
+
+        <TextView
+            android:id="@+id/tv_add_cart"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/d50"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/d5"
+            android:layout_weight="1"
+            android:background="@drawable/border_right_corner_1"
+            android:gravity="center"
+            android:text="Thêm vào giỏ hàng"
+            android:textColor="#EC0505"
+            android:textSize="@dimen/ts16" />
+
+    </LinearLayout>
+
+</RelativeLayout>
