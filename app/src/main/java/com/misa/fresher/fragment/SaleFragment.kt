@@ -19,14 +19,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.navigation.NavigationView
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.AdapterCate
 import com.misa.fresher.adapter.AdapterProduct
 import com.misa.fresher.databinding.FragmentSaleBinding
-import com.misa.fresher.login.LoginFragment
 import com.misa.fresher.model.*
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
@@ -199,16 +197,12 @@ class SaleFragment : Fragment() {
                     )
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
-                R.id.mnLogOut -> {
-                    var isLogin = false
-                    viewModel.customer.observe(viewLifecycleOwner) { user ->
-                        drawerLayout.closeDrawer(GravityCompat.START)
-                        findNavController().navigate(R.id.action_saleFragment_to_loginFragment)
-                        isLogin = true
-                    }
-                    if (!isLogin) {
-                        activity?.showToast("Vui lòng đăng nhập")
-                    }
+                R.id.mnAddress -> {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                    findNavController().navigate(
+                        R.id.action_saleFragment_to_addressUserFragment,
+                        bundleOf(Pair("type", 1))
+                    )
                 }
             }
             true

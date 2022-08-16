@@ -6,14 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.adapter.AdapterAddress
-import com.misa.fresher.databinding.FragmentBillDetailBinding
-import com.misa.fresher.model.AddressUser
+import com.misa.fresher.databinding.FragmentAddressUserBinding
+import com.misa.fresher.model.Address
 import com.misa.fresher.model.User
-import com.misa.fresher.model.UserRespone
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
 import com.misa.fresher.showToast
@@ -26,13 +26,14 @@ import kotlinx.coroutines.withContext
 
 
 class AddressUserFragment : Fragment() {
-    val binding: FragmentBillDetailBinding by lazy {
-        FragmentBillDetailBinding.inflate(
+    val binding: FragmentAddressUserBinding by lazy {
+        FragmentAddressUserBinding.inflate(
             layoutInflater
         )
     }
     val viewModel: UserViewModel by activityViewModels()
     var idU: Int = 0
+    var type : Int =0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,23 +43,17 @@ class AddressUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tvBillCode.text = "Danh sách địa chỉ giao hàng"
-        binding.imbCart.visibility = View.GONE
-        binding.llBuyMore.visibility = View.GONE
-        binding.layoutCus.visibility = View.GONE
-        binding.llTotal.visibility = View.GONE
-        binding.llBottomToolbar.visibility = View.GONE
+        initView()
         getListAddress()
         onBack()
     }
 
     private fun onBack() {
         binding.ibBack.setOnClickListener { activity?.onBackPressed() }
-        binding.tvBuyMore.setOnClickListener { activity?.onBackPressed() }
     }
 
-    private fun setupView(list: List<AddressUser>) {
-        val adapterAddress = AdapterAddress(list as ArrayList<AddressUser>) { chooseAddress(it) }
+    private fun setupView(list: List<Address>) {
+        val adapterAddress = AdapterAddress(list as ArrayList<Address>) { chooseAddress(it) }
         binding.rvSelectedProduct.adapter = adapterAddress
         binding.rvSelectedProduct.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -72,7 +67,7 @@ class AddressUserFragment : Fragment() {
                 try {
                     if (response.isSuccessful && response.body() != null) {
                         withContext(Main) {
-                            setupView(response.body() as ArrayList<AddressUser>)
+                            setupView(response.body() as ArrayList<Address>)
                         }
                     } else {
                         withContext(Main) {
@@ -87,8 +82,27 @@ class AddressUserFragment : Fragment() {
 
     }
 
-    private fun chooseAddress(address: AddressUser) {
-        viewModel.addAddress(address)
-        activity?.onBackPressed()
+    private fun initView() {
+        type = arguments?.getInt(TYPE)!!
+        if (type == TYPE_GET_ADDRESS) {
+            binding.tvBillCode.text = "Danh sách địa chỉ"
+        } else if (type == TYPE_CHOOSE_ADDRESS) {
+            binding.tvBillCode.text = "Chọn địa chỉ nhận hàng"
+        }
+    }
+
+    private fun chooseAddress(address: Address) {
+        if (type == TYPE_GET_ADDRESS) {
+            activity?.showToast("Tesst")
+        } else if (type == TYPE_CHOOSE_ADDRESS) {
+            viewModel.addAddress(address)
+            activity?.onBackPressed()
+        }
+    }
+
+    companion object {
+        const val TYPE_GET_ADDRESS = 1
+        const val TYPE_CHOOSE_ADDRESS = 2
+        const val TYPE = "type"
     }
 }

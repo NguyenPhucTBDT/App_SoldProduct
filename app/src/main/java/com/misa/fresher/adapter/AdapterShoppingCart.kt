@@ -26,7 +26,11 @@ class AdapterShoppingCart(
             Picasso.get().load(product.imglink).into(img)
             title.text = product.title
             quantity.text = product.quantity.toString()
-            price.text = decimalFormat.format(product.price) + " ₫"
+            if (product.sale_price > 0) {
+                price.text = decimalFormat.format(product.sale_price) + " ₫"
+            } else {
+                price.text = decimalFormat.format(product.price) + " ₫"
+            }
             tvDelete.setOnClickListener { updateView(product) }
         }
     }

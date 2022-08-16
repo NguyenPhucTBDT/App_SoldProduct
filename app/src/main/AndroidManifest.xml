@@ -12,14 +12,6 @@
         android:theme="@style/Theme.FreshersApplication"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".signup.SignUpFragment"
-            android:exported="true" />
-        <activity
-            android:name=".login.LoginFragment"
-            android:exported="true">
-
-        </activity>
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:noHistory="true">
@@ -27,7 +19,8 @@
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+        </intent-filter>
+        </activity>
     </application>
 
 </manifest>

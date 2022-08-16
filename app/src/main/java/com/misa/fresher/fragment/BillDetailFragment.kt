@@ -2,7 +2,6 @@ package com.misa.fresher.fragment
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.R
 import com.misa.fresher.adapter.BillProductAdapter
-import com.misa.fresher.showToast
 import com.misa.fresher.databinding.FragmentBillDetailBinding
 import com.misa.fresher.model.*
 import com.misa.fresher.retrofit.ApiHelper
@@ -22,9 +20,7 @@ import com.misa.fresher.retrofit.ApiInterface
 import com.misa.fresher.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.text.DecimalFormat
 import kotlin.collections.ArrayList
 
@@ -130,9 +126,6 @@ class BillDetailFragment : Fragment() {
      **/
     private fun openShippingInfor() {
         binding.ivShipping.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_billDetailFragment_to_addressUserFragment
-            )
         }
     }
 
@@ -143,7 +136,7 @@ class BillDetailFragment : Fragment() {
      **/
     private fun saveBillDetail() {
         binding.tvTotalBillPrice.setOnClickListener {
-            viewModel.addressUser.observe(viewLifecycleOwner, Observer<AddressUser> {
+            viewModel.addressUser.observe(viewLifecycleOwner, Observer<Address> {
                 it.let {
                     if (it != null) {
                         oderProduct(it)
@@ -160,7 +153,7 @@ class BillDetailFragment : Fragment() {
         }
     }
 
-    private fun oderProduct(address: AddressUser) {
+    private fun oderProduct(address: Address) {
         val api = ApiHelper.getInstance().create(ApiInterface::class.java)
         viewModel.customer.observe(viewLifecycleOwner,
             Observer<User> {

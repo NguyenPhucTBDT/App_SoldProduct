@@ -99,4 +99,8 @@
     <string name="ok">Đồng ý</string>
     <string name="cancel">Hủy</string>
     <string name="confirm_delete">Xác nhận xóa</string>
+    <string name="add_new_address">Thêm địa chỉ mới</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="address_receive">Địa chỉ giao hàng</string>
+    <string name="user_info">Thông tin cá nhân</string>
 </resources>

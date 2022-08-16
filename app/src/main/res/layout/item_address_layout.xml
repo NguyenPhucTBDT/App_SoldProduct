@@ -9,13 +9,17 @@
     <TextView
         android:text="0368894608"
         android:id="@+id/tv_phone"
+        android:textSize="@dimen/ts20"
         android:layout_marginStart="@dimen/de10"
+        android:gravity="center_vertical"
         android:textColor="@color/violet_dark"
         android:layout_width="match_parent"
         android:layout_height="@dimen/d50"/>
     <TextView
         android:text="Phùng Chí Kiên"
         android:maxLines="2"
+        android:textSize="@dimen/ts20"
+        android:gravity="center_vertical"
         android:id="@+id/tv_address"
         android:textColor="@color/violet_dark"
         android:layout_margin="@dimen/de10"

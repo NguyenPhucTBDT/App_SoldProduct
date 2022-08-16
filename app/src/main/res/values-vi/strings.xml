@@ -65,6 +65,10 @@
     <string name="login_account">Tài khoản/mật khẩu không được để trống!</string>
     <string name="connect_error">Không có kết nối Internet!</string>
     <string name="available_item"><![CDATA[hàng hóa có sẵn(sl>0)]]></string>
+    <string name="add_new_address">Thêm địa chỉ mới</string>
+    <string name="cart">Giỏ hàng</string>
+    <string name="address_receive">Địa chỉ giao hàng</string>
+    <string name="user_info">Thông tin cá nhân</string>
     <string-array name="spnDay">
         <item>Hôm nay</item>
         <item>Hôm qua</item>

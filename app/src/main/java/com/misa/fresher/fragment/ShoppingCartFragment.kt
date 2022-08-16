@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.misa.fresher.R
 import com.misa.fresher.adapter.AdapterShoppingCart
 import com.misa.fresher.databinding.FragmentBillDetailBinding
+import com.misa.fresher.databinding.FragmentShoppingCartBinding
 import com.misa.fresher.model.*
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
@@ -35,8 +36,8 @@ class ShoppingCartFragment : Fragment() {
     private val viewModel: UserViewModel by activityViewModels()
     private var idU: Int? = 0
     private val decimal = DecimalFormat("0,000.0")
-    private val binding: FragmentBillDetailBinding by lazy {
-        FragmentBillDetailBinding.inflate(layoutInflater)
+    private val binding: FragmentShoppingCartBinding by lazy {
+        FragmentShoppingCartBinding.inflate(layoutInflater)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,7 +59,7 @@ class ShoppingCartFragment : Fragment() {
     }
 
     private fun initView(idU: Int) {
-        val adapter = AdapterShoppingCart(listShoppingCart!!, requireContext()) {
+        val adapter = AdapterShoppingCart(listShoppingCart, requireContext()) {
             deleteAll(
                 it.product_id,
                 idU
@@ -66,7 +67,13 @@ class ShoppingCartFragment : Fragment() {
         }
         binding.rvSelectedProduct.adapter = adapter
         binding.rvSelectedProduct.layoutManager = LinearLayoutManager(requireActivity())
-        val total = listShoppingCart.sumOf { it.quantity * it.price.toDouble() }
+        val total = listShoppingCart.sumOf {
+            if (it.sale_price > 0) {
+                it.quantity * it.sale_price.toDouble()
+            } else {
+                it.quantity * it.price.toDouble()
+            }
+        }
         if (listShoppingCart.size > 0) {
             binding.tvTotalSelectedProduct.let {
                 it.text = listShoppingCart.sumOf { it.quantity }.toString()
@@ -80,12 +87,14 @@ class ShoppingCartFragment : Fragment() {
             }
             binding.tvTotalMoney.let {
                 it.text = decimal.format(total)
-                        .toString() + " ₫"
+                    .toString() + " ₫"
                 it.setTextColor(resources.getColor(R.color.red))
             }
             binding.tvTotalBillPrice.setOnClickListener {
-                findNavController().navigate(R.id.action_shoppingCartFragment_to_oderFragment,
-                    bundleOf("list" to listShoppingCart))
+                findNavController().navigate(
+                    R.id.action_shoppingCartFragment_to_oderFragment,
+                    bundleOf("list" to listShoppingCart)
+                )
             }
         } else {
             binding.tvTotalSelectedProduct.let {
@@ -129,7 +138,7 @@ class ShoppingCartFragment : Fragment() {
         }
     }
 
-    private fun oderProduct(addressUser: AddressUser) {
+    private fun oderProduct(address: Address) {
         val api = ApiHelper.getInstance().create(ApiInterface::class.java)
         viewModel.customer.observe(viewLifecycleOwner,
             Observer<User> {

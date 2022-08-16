@@ -65,6 +65,7 @@
             android:padding="@dimen/d5">
 
             <LinearLayout
+                android:id="@+id/ll_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -85,6 +86,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/d3"
@@ -93,6 +95,7 @@
                         android:textSize="@dimen/ts20" />
 
                     <TextView
+                        android:id="@+id/tv_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="@dimen/d3"
@@ -108,6 +111,7 @@
                 android:layout_height="wrap_content" />
 
             <LinearLayout
+                android:id="@+id/ll_payment_method"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -122,6 +126,7 @@
                     android:textSize="@dimen/ts20" />
 
                 <TextView
+                    android:id="@+id/tv_payment_method"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginVertical="@dimen/d3"
@@ -173,7 +178,7 @@
             android:gravity="center"
             android:text="Đặt hàng"
             android:textColor="@color/white"
-            android:textSize="@dimen/ts16" />
+            android:textSize="@dimen/ts20" />
 
     </LinearLayout>
 

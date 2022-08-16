@@ -5,18 +5,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.misa.fresher.databinding.ListBillItemLayoutBinding
-import com.misa.fresher.model.BillInfor
 import com.misa.fresher.model.Invoice
-import com.misa.fresher.model.SelectedProduct
 import java.text.DecimalFormat
-import java.util.*
 import kotlin.collections.ArrayList
 
-class ListBillAdapter(
+class AdapterOderInfo(
     private val mListInvoice: ArrayList<Invoice>,
     val updateView: (invoice: Invoice) -> Unit
 ) :
-    RecyclerView.Adapter<ListBillAdapter.ViewHolder>() {
+    RecyclerView.Adapter<AdapterOderInfo.ViewHolder>() {
     inner class ViewHolder(binding: ListBillItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private val tvBillNum = binding.tvBillNum
@@ -34,7 +31,7 @@ class ListBillAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ListBillAdapter.ViewHolder {
+    ): AdapterOderInfo.ViewHolder {
         val binding: ListBillItemLayoutBinding by lazy {
             ListBillItemLayoutBinding.inflate(
                 LayoutInflater.from(parent.context)

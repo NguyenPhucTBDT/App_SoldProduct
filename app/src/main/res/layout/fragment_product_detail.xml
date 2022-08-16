@@ -26,11 +26,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="6"
+            android:layout_weight="7"
             android:gravity="center"
             android:text="Thông tin sản phẩm"
             android:textColor="@color/white"
-            android:textSize="@dimen/ts16" />
+            android:textSize="@dimen/ts20" />
 
         <ImageButton
             android:id="@+id/imb_cart"
@@ -197,7 +197,7 @@
             android:gravity="center"
             android:text="Mua ngay"
             android:textColor="@color/white"
-            android:textSize="@dimen/ts16" />
+            android:textSize="@dimen/ts20" />
 
         <TextView
             android:id="@+id/tv_add_cart"
@@ -210,7 +210,7 @@
             android:gravity="center"
             android:text="Thêm vào giỏ hàng"
             android:textColor="#EC0505"
-            android:textSize="@dimen/ts16" />
+            android:textSize="@dimen/ts20" />
 
     </LinearLayout>
 

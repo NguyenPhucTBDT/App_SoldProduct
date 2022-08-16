@@ -1,8 +1,6 @@
 package com.misa.fresher.retrofit
 
 import com.misa.fresher.model.*
-import okhttp3.ResponseBody
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -13,7 +11,7 @@ interface ApiInterface {
     @POST("WSLibrary/api/user/signup")
     suspend fun signUp(@Body user: User): Response<Messenger>
 
-    @GET("WSLibrary/api/user/infor/{id}")
+    @GET("WSLibrary/api/user/info/{id}")
     suspend fun getUser(@Path("id") id: Int): Response<User>
 
     @GET("WSLibrary/api/product/product_detail/{idP}")
@@ -39,14 +37,14 @@ interface ApiInterface {
         @Path("idU") idU: Int
     ): Response<Messenger>
 
-    @GET("WSLibrary/api/cart/delete/{idP}&{idU}")
+    @DELETE("WSLibrary/api/cart/delete/{idP}&{idU}")
     suspend fun deleteByID(@Path("idP") idP: Int, @Path("idU") id: Int): Response<Messenger>
 
     @GET("WSProduct/api/cart/list-invoice/{idU}")
     suspend fun getListOder(@Path("idU") id: Int): Response<List<Invoice>>
 
-    @GET("WSProduct/api/user/address/{idU}")
-    suspend fun getListAddress(@Path("idU") id: Int): Response<List<AddressUser>>
+    @GET("WSLibrary/api/address/all/{idU}")
+    suspend fun getListAddress(@Path("idU") id: Int): Response<List<Address>>
 
     @GET("WSProduct/api/cart/list-invoice-detail/{idI}")
     suspend fun getOderDetailById(@Path("idI") id: Int): Response<List<InvoiceDetail>>

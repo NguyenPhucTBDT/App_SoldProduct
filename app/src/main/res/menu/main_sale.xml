@@ -7,13 +7,17 @@
     <item
         android:id="@+id/mnBill"
         android:icon="@drawable/ic_order"
-        android:title="@string/list_of_bill"></item>
+        android:title="@string/list_of_bill" />
     <item
         android:id="@+id/mnShoppingCart"
         android:icon="@drawable/ic_cart"
-        android:title="Giỏ hàng"></item>
+        android:title="@string/cart" />
     <item
-        android:id="@+id/mnLogOut"
-        android:icon="@drawable/ic_log_out"
-        android:title="Đăng xuất"></item>
+        android:id="@+id/mnAddress"
+        android:icon="@drawable/ic_order"
+        android:title="@string/address_receive" />
+    <item
+        android:id="@+id/mnUser"
+        android:icon="@drawable/ic_user"
+        android:title="@string/user_info" />
 </menu>

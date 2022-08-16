@@ -1,8 +1,10 @@
 package com.misa.fresher.model
 
-class AddressUser(
+class Address(
+    var idA : Int,
     var idU: Int,
     var address: String,
+    var name : String,
     var phone: String,
 ) {
 }

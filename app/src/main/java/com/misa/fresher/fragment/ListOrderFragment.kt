@@ -18,12 +18,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
-import com.misa.fresher.adapter.ListBillAdapter
-import com.misa.fresher.databinding.FragmentListBillsBinding
+import com.misa.fresher.adapter.AdapterOderInfo
+import com.misa.fresher.databinding.FragmentListOrdersBinding
 import com.misa.fresher.login.LoginFragment
 import com.misa.fresher.model.Invoice
 import com.misa.fresher.model.User
-import com.misa.fresher.model.UserRespone
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
 import com.misa.fresher.viewmodel.UserViewModel
@@ -34,9 +33,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.DecimalFormat
 
-class ListBillsFragment : Fragment() {
-    private val binding: FragmentListBillsBinding by lazy {
-        FragmentListBillsBinding.inflate(
+class ListOrderFragment : Fragment() {
+    private val binding: FragmentListOrdersBinding by lazy {
+        FragmentListOrdersBinding.inflate(
             layoutInflater
         )
     }
@@ -92,7 +91,7 @@ class ListBillsFragment : Fragment() {
      *@date:3/25/2022
      **/
     private fun setUpRecycleView() {
-        val adapter = ListBillAdapter(mListInvoice) { gotoOderDetail(it) }
+        val adapter = AdapterOderInfo(mListInvoice) { gotoOderDetail(it) }
         binding.rcvBill.adapter = adapter
         binding.rcvBill.layoutManager = LinearLayoutManager(requireContext())
         binding.tvListBillSize.text = mListInvoice.size.toString()
@@ -124,11 +123,6 @@ class ListBillsFragment : Fragment() {
                 R.id.mnSale -> {
                     activity?.onBackPressed()
                     drawerLayout.closeDrawer(GravityCompat.START)
-                }
-                R.id.mnLogOut -> {
-                    val intent = Intent(requireContext(), LoginFragment::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    (activity as MainActivity).startActivity(intent)
                 }
                 R.id.mnShoppingCart -> {
                     findNavController().navigate(

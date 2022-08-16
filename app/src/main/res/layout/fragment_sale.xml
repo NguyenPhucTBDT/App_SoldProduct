@@ -3,29 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dlFilter"
-    tools:openDrawer="end"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".fragment.SaleFragment">
+    tools:context=".fragment.SaleFragment"
+    tools:openDrawer="end">
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
         android:id="@+id/swipelayout"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                app:contentInsetEnd="0dp"
-                app:contentInsetStart="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/violet_dark"
+                app:contentInsetEnd="0dp"
+                app:contentInsetStart="0dp"
                 app:popupTheme="@style/ToolbarStyle">
+
                 <ImageButton
                     android:id="@+id/ibMenu"
                     android:layout_width="@dimen/d50"
@@ -33,6 +37,7 @@
                     android:background="@color/violet_dark"
                     android:src="@drawable/ic_baseline_menu_24"
                     tools:ignore="ContentDescription" />
+
                 <com.misa.fresher.custom.CustomToolbar
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -50,36 +55,36 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:background="@color/white"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/white">
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/layout_cus"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/d40"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:weightSum="10"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageButton
-                        android:background="@color/white"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/d5"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_user"
-                        android:contentDescription="TODO" />
+                        android:background="@color/white"
+                        android:contentDescription="TODO"
+                        android:src="@drawable/ic_user" />
 
                     <TextView
-                        android:background="@color/white"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/d5"
                         android:layout_weight="4"
+                        android:background="@color/white"
                         android:ellipsize="end"
                         android:gravity="center_vertical"
                         android:hint="@string/customer_infor"
@@ -89,13 +94,13 @@
                         android:textSize="@dimen/ts16" />
 
                     <ImageButton
-                        android:background="@color/white"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="@dimen/d5"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_calendar"
-                        android:contentDescription="TODO" />
+                        android:background="@color/white"
+                        android:contentDescription="TODO"
+                        android:src="@drawable/ic_calendar" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -110,13 +115,13 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/relative_1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/d40"
                     android:background="@color/colorGrayCommon"
                     android:gravity="center"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:weightSum="3"
                     app:layout_constraintTop_toBottomOf="@id/layout_cus">
 
@@ -159,9 +164,9 @@
                     app:layout_constraintRight_toRightOf="parent">
 
                     <LinearLayout
-                        android:visibility="gone"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/d60">
+                        android:layout_height="@dimen/d60"
+                        android:visibility="gone">
 
                         <LinearLayout
                             android:id="@+id/llRefresh"
@@ -216,6 +221,7 @@
         android:layout_marginTop="?attr/actionBarSize"
         android:background="@color/white"
         android:fitsSystemWindows="true">
+
         <include layout="@layout/fragment_filter" />
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>
