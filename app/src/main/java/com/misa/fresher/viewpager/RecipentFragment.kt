@@ -9,11 +9,11 @@ import android.widget.EditText
 import androidx.core.widget.doAfterTextChanged
 import androidx.lifecycle.ViewModelProvider
 import com.misa.fresher.R
-import com.misa.fresher.viewmodel.ShipInforModel
+import com.misa.fresher.viewmodel.PaymentViewModel
 import com.misa.fresher.model.ShipInfor
 
 class RecipentFragment : Fragment() {
-    private var model: ShipInforModel? = null
+    private var model: PaymentViewModel? = null
     private var shipInfor: ShipInfor? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +23,7 @@ class RecipentFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        model = ViewModelProvider(requireActivity()).get(ShipInforModel::class.java)
+        model = ViewModelProvider(requireActivity()).get(PaymentViewModel::class.java)
         return inflater.inflate(R.layout.fragment_receiver, container, false)
     }
 
@@ -54,7 +54,7 @@ class RecipentFragment : Fragment() {
         etWard.doAfterTextChanged {
             shipInfor.ward=etWard.text.toString()
         }
-            model?.add(shipInfor)
+            //model?.add(shipInfor)
     }
     //private fun addShipInfor(input:String)
 }

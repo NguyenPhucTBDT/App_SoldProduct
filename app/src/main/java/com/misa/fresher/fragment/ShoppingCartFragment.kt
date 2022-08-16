@@ -46,7 +46,6 @@ class ShoppingCartFragment : Fragment() {
             getListShoppingCart(it.idU)
         })
         binding.tvBillCode.text = "Giỏ hàng"
-        binding.imbCart.visibility = View.GONE
         binding.ivShipping.visibility = View.GONE
         onBack()
     }

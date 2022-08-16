@@ -26,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="7"
+            android:layout_weight="8"
             android:gravity="center"
             android:text="Thông tin sản phẩm"
             android:textColor="@color/white"
@@ -39,17 +39,7 @@
             android:layout_weight="1"
             android:background="@color/violet_dark"
             android:contentDescription="@string/none"
-            android:src="@drawable/ic_baseline_shopping_cart_24"
-            android:visibility="gone" />
-
-        <ImageButton
-            android:id="@+id/img_more"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/violet_dark"
-            android:src="@drawable/ic_baseline_more_vert_24"
-            android:visibility="gone" />
+            android:visibility="visible" />
     </LinearLayout>
 
     <ScrollView

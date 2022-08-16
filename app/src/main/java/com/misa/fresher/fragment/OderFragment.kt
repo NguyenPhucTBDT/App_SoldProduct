@@ -13,6 +13,7 @@ import com.misa.fresher.R
 import com.misa.fresher.adapter.AdapterOder
 import com.misa.fresher.databinding.FragmentOderBinding
 import com.misa.fresher.model.Cart
+import com.misa.fresher.viewmodel.PaymentViewModel
 import com.misa.fresher.viewmodel.UserViewModel
 import java.text.DecimalFormat
 
@@ -22,6 +23,7 @@ class OderFragment : Fragment() {
     val decimalFormat = DecimalFormat("0,000")
     var listProduct = arrayListOf<Cart>()
     val viewModel : UserViewModel by activityViewModels()
+    private val paymentModel : PaymentViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,6 +54,9 @@ class OderFragment : Fragment() {
                 Pair("type",2)
             ))
         }
+        binding.llPaymentMethod.setOnClickListener {
+            findNavController().navigate(R.id.action_oderFragment_to_paymentMethodFragment)
+        }
         binding.ibBack.setOnClickListener {
             activity?.onBackPressed()
         }
@@ -61,5 +66,10 @@ class OderFragment : Fragment() {
             binding.tvPhone.text = it.name + " | "+ it.phone
             binding.tvAddress.text = it.address
         }
+        paymentModel.shipItem.observe(viewLifecycleOwner) {
+            if(it ==1) binding.tvPaymentMethod.text = "Thanh toán khi nhận hàng"
+            else binding.tvPaymentMethod.text = "Thanh toán bằng thẻ ngân hàng"
+        }
     }
+
 }

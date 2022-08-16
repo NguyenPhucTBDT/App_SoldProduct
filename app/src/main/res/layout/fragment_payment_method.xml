@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.PaymentMethodFragment">
+
+    <LinearLayout
+        android:id="@+id/llToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/violet_dark"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ibBack"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/violet_dark"
+            android:src="@drawable/ic_arrow_left" />
+
+        <TextView
+            android:id="@+id/tvBillCode"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="8"
+            android:gravity="center"
+            android:textSize="@dimen/ts20"
+            android:text="Phương thức thanh toán"
+            android:textColor="@color/white" />
+
+        <ImageButton
+            android:id="@+id/imb_cart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/violet_dark"
+            android:contentDescription="@string/none" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llToolbar"
+        android:layout_marginHorizontal="@dimen/d25"
+        android:layout_marginTop="@dimen/de10"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_method_1"
+            android:background="@drawable/border_button_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thanh toán khi nhận hàng"
+            android:textAllCaps="false"
+            android:textSize="@dimen/ts20" />
+
+        <Button
+            android:id="@+id/btn_method_2"
+            android:layout_marginTop="@dimen/de10"
+            android:background="@drawable/border_button_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thanh toán bằng thẻ ngân hàng"
+            android:textAllCaps="false"
+            android:textSize="@dimen/ts20" />
+    </LinearLayout>
+</RelativeLayout>

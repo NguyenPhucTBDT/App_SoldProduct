@@ -17,7 +17,7 @@
             android:layout_marginHorizontal="@dimen/d5"
             android:id="@+id/tv_productName"
             android:layout_width="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="1.5"
             android:layout_height="0dp"/>
         <TextView
             android:textSize="@dimen/ts20"

@@ -30,15 +30,14 @@
             android:gravity="center"
             android:text="@string/list_of_bill"
             android:textColor="@color/white"
-            android:textSize="@dimen/ts16" />
+            android:textSize="@dimen/ts20" />
 
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/d5"
             android:layout_weight="1"
-            android:background="@color/violet_dark"
-            android:src="@drawable/ic_baseline_search_24" />
+            android:background="@color/violet_dark" />
     </LinearLayout>
 
     <LinearLayout

@@ -121,7 +121,7 @@ class ListOrderFragment : Fragment() {
         navigationView?.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.mnSale -> {
-                    activity?.onBackPressed()
+                    findNavController().navigate(R.id.action_listBillsFragment_to_saleFragment)
                     drawerLayout.closeDrawer(GravityCompat.START)
                 }
                 R.id.mnShoppingCart -> {

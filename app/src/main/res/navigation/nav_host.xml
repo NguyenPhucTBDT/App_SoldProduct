@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_listBillsFragment_to_shoppingCartFragment"
             app:destination="@id/shoppingCartFragment" />
+        <action
+            android:id="@+id/action_listBillsFragment_to_saleFragment"
+            app:destination="@id/saleFragment" />
     </fragment>
     <fragment
         android:id="@+id/shoppingCartFragment"
@@ -102,5 +105,13 @@
         <action
             android:id="@+id/action_oderFragment_to_addressUserFragment"
             app:destination="@id/addressUserFragment" />
+        <action
+            android:id="@+id/action_oderFragment_to_paymentMethodFragment"
+            app:destination="@id/paymentMethodFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/paymentMethodFragment"
+        android:name="com.misa.fresher.fragment.PaymentMethodFragment"
+        android:label="fragment_payment_method"
+        tools:layout="@layout/fragment_payment_method" />
 </navigation>

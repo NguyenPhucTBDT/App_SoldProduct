@@ -37,7 +37,7 @@
             android:layout_marginStart="@dimen/d5"
             android:id="@+id/tv_delete"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:layout_gravity="center_vertical"

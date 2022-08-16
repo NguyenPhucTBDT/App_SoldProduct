@@ -26,49 +26,38 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="6"
+            android:layout_weight="8"
             android:gravity="center"
-            android:textSize="@dimen/ts20"
             android:text="Đặt hàng"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/ts20" />
 
         <ImageButton
-            android:visibility="gone"
-            android:id="@+id/imb_cart"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/violet_dark"
             android:contentDescription="@string/none"
-            android:src="@drawable/ic_baseline_shopping_cart_24" />
-
-        <ImageButton
-            android:visibility="gone"
-            android:id="@+id/img_more"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@color/violet_dark"
-            android:src="@drawable/ic_baseline_more_vert_24" />
+            android:visibility="visible" />
     </LinearLayout>
 
     <LinearLayout
-        android:visibility="gone"
-        android:background="@color/white"
         android:id="@+id/layout_cus"
         android:layout_width="match_parent"
         android:layout_height="@dimen/d50"
         android:layout_below="@id/llToolbar"
+        android:background="@color/white"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:weightSum="10">
 
         <ImageButton
-            android:background="@color/white"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginStart="@dimen/d5"
             android:layout_weight="1"
+            android:background="@color/white"
             android:contentDescription="TODO"
             android:src="@drawable/ic_user" />
 
@@ -86,11 +75,11 @@
             android:textSize="@dimen/ts16" />
 
         <ImageButton
-            android:background="@color/white"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/d5"
             android:layout_weight="1"
+            android:background="@color/white"
             android:src="@drawable/ic_baseline_calendar_month_24" />
 
         <TextView
@@ -106,12 +95,12 @@
     </LinearLayout>
 
     <View
-        android:visibility="gone"
         android:id="@+id/vSpace"
         android:layout_width="match_parent"
         android:layout_height="@dimen/d5"
         android:layout_below="@id/layout_cus"
-        android:background="@color/colorLightGray" />
+        android:background="@color/colorLightGray"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/llBuyMore"
@@ -133,37 +122,44 @@
             android:textSize="@dimen/ts20" />
 
         <ImageButton
-            android:visibility="gone"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:background="@color/white"
-            android:src="@drawable/ic_qr_code" />
+            android:src="@drawable/ic_qr_code"
+            android:visibility="gone" />
     </LinearLayout>
+
+    <View
+        android:layout_below="@id/llBuyMore"
+        android:id="@+id/space"
+        android:background="@color/violet_dark"
+        android:layout_width="match_parent"
+        android:layout_height="2dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSelectedProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/llTotal"
-        android:layout_below="@id/llBuyMore"
+        android:layout_below="@id/space"
         android:background="@color/white"
         android:padding="@dimen/de10" />
 
     <LinearLayout
-        android:background="@color/white"
         android:id="@+id/llBottomToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@color/white">
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="@dimen/d50"
             android:layout_height="@dimen/d50"
             android:layout_gravity="center_vertical"
             android:layout_margin="@dimen/d5"
-            android:background="@drawable/border_delivery">
+            android:background="@drawable/border_delivery"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/ivShipping"
@@ -174,12 +170,12 @@
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="@dimen/d50"
             android:layout_height="@dimen/d50"
             android:layout_gravity="center_vertical"
             android:layout_margin="@dimen/d5"
-            android:background="@drawable/border_delivery">
+            android:background="@drawable/border_delivery"
+            android:visibility="gone">
 
             <ImageView
                 android:layout_width="@dimen/d30"
@@ -224,12 +220,12 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:background="@color/white"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/d5"
             android:layout_marginBottom="@dimen/d5"
             android:layout_weight="1"
+            android:background="@color/white"
             android:src="@drawable/ic_money" />
 
         <TextView
