@@ -1,5 +1,6 @@
 package com.misa.fresher.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -18,10 +19,11 @@ class AdapterOder(
         private val price = binding.tvPrice
         private val img = binding.imgProduct
         private val decimalFormat = DecimalFormat("0,000.0")
+        @SuppressLint("SetTextI18n")
         fun bind(product: Cart) {
             Picasso.get().load(product.imglink).into(img)
             title.text = product.title
-            quantity.text = product.quantity.toString()
+            quantity.text = "x ${product.quantity}"
             price.text = decimalFormat.format(product.price) + " ₫"
         }
     }

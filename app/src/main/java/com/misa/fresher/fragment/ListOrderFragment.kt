@@ -15,14 +15,17 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.navigation.NavigationView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.AdapterOderInfo
 import com.misa.fresher.databinding.FragmentListOrdersBinding
-import com.misa.fresher.model.Invoice
+import com.misa.fresher.model.Order
 import com.misa.fresher.model.User
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
+import com.misa.fresher.showToast
 import com.misa.fresher.viewmodel.UserViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -39,7 +42,7 @@ class ListOrderFragment : Fragment() {
     }
     private val viewModel: UserViewModel by activityViewModels()
     private val decimalFormat = DecimalFormat("0,000.0")
-    var mListInvoice = arrayListOf<Invoice>()
+    var mListOrder = arrayListOf<Order>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,9 +54,9 @@ class ListOrderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.customer.observe(viewLifecycleOwner, Observer<User> {
+        viewModel.customer.observe(viewLifecycleOwner) {
             getListInvoice(it.idU)
-        })
+        }
         setUpView()
         openDrawerLayoutMenu(view)
         showSaleFragment()
@@ -89,12 +92,12 @@ class ListOrderFragment : Fragment() {
      *@date:3/25/2022
      **/
     private fun setUpRecycleView() {
-        val adapter = AdapterOderInfo(mListInvoice) { gotoOderDetail(it) }
+        val adapter = AdapterOderInfo(mListOrder) { gotoOderDetail(it) }
         binding.rcvBill.adapter = adapter
         binding.rcvBill.layoutManager = LinearLayoutManager(requireContext())
-        binding.tvListBillSize.text = mListInvoice.size.toString()
+        binding.tvListBillSize.text = mListOrder.size.toString()
         binding.tvListBillAmount.text =
-            decimalFormat.format(mListInvoice.sumOf { it.amount.toDouble() }).toString()
+            decimalFormat.format(mListOrder.sumOf { it.amount.toDouble() }).toString()
     }
 
     /**
@@ -145,11 +148,14 @@ class ListOrderFragment : Fragment() {
                 val response = api.getListOder(id)
                 if (response.isSuccessful && response.body() != null) {
                     withContext(Main) {
-                        mListInvoice = response.body() as ArrayList<Invoice>
+                        val type = object : TypeToken<List<Order>>() {}.type
+                        mListOrder = Gson().fromJson(response.body(), type)
                         setUpRecycleView()
                     }
                 } else {
-                    Log.e("errr", response.errorBody().toString())
+                    withContext(Main) {
+                        activity?.showToast(response.errorBody().toString())
+                    }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -157,17 +163,17 @@ class ListOrderFragment : Fragment() {
         }
     }
 
-    private fun gotoOderDetail(invoice: Invoice) {
-        viewModel.customer.observe(viewLifecycleOwner, Observer {
+    private fun gotoOderDetail(order: Order) {
+        viewModel.customer.observe(viewLifecycleOwner) {
             findNavController().navigate(
                 R.id.action_listBillsFragment_to_oderDetailFragment,
                 bundleOf(
-                    Pair("idI", invoice.id),
-                    Pair("address", invoice.address),
-                    Pair("phone", invoice.phone),
+                    Pair("idU", order.idU),
+                    Pair("address", order.address),
+                    Pair("phone", order.phone),
                     Pair("name", it.fullname)
                 )
             )
-        })
+        }
     }
 }

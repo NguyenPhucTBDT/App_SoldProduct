@@ -1,5 +1,6 @@
 package com.misa.fresher.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,9 +11,12 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.misa.fresher.adapter.AdapterAddress
 import com.misa.fresher.databinding.FragmentAddressUserBinding
 import com.misa.fresher.model.Address
+import com.misa.fresher.model.Order
 import com.misa.fresher.model.User
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
@@ -33,7 +37,7 @@ class AddressUserFragment : Fragment() {
     }
     val viewModel: UserViewModel by activityViewModels()
     var idU: Int = 0
-    var type : Int =0
+    var type: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,14 +64,17 @@ class AddressUserFragment : Fragment() {
 
     private fun getListAddress() {
         val api = ApiHelper.getInstance().create(ApiInterface::class.java)
-        viewModel.customer.observe(viewLifecycleOwner, Observer<User> {
+        viewModel.customer.observe(viewLifecycleOwner) {
             CoroutineScope(IO).launch {
                 Log.e("idU:", idU.toString())
                 val response = api.getListAddress(it.idU)
                 try {
                     if (response.isSuccessful && response.body() != null) {
                         withContext(Main) {
-                            setupView(response.body() as ArrayList<Address>)
+                            val type = object : TypeToken<List<Address>>() {}.type
+                            val listAddress =
+                                Gson().fromJson(response.body(), type) as ArrayList<Address>
+                            setupView(listAddress)
                         }
                     } else {
                         withContext(Main) {
@@ -78,10 +85,10 @@ class AddressUserFragment : Fragment() {
 
                 }
             }
-        })
-
+        }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initView() {
         type = arguments?.getInt(TYPE)!!
         if (type == TYPE_GET_ADDRESS) {

@@ -86,4 +86,7 @@
     <string name="ok">Đồng ý</string>
     <string name="cancel">Hủy</string>
     <string name="confirm_delete">Xác nhận xóa</string>
+    <string name="order">Đặt hàng</string>
+    <string name="status">Trạng thái :</string>
+    <string name="all_order">Tổng tiền :</string>
 </resources>

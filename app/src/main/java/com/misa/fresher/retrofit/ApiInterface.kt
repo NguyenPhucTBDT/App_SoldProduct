@@ -25,8 +25,8 @@ interface ApiInterface {
     suspend fun getListCate(): Response<List<Category>>
 
     @Headers("Content-Type: application/json")
-    @POST("WSProduct/api/cart/buy")
-    suspend fun oderProduct(@Body cart: Cart): Response<Messenger>
+    @POST("WSLibrary/api/order/buy")
+    suspend fun oderProduct(@Body oderInfo: OrderInfo): Response<JsonElement>
 
     @GET("WSLibrary/api/cart/all/{idU}")
     suspend fun getShoppingCart(@Path("idU") id: Int): Response<List<Cart>>
@@ -42,11 +42,11 @@ interface ApiInterface {
     suspend fun deleteByID(@Path("idP") idP: Int, @Path("idU") id: Int): Response<Messenger>
 
     @GET("WSLibrary/api/order/list-order/{idU}")
-    suspend fun getListOder(@Path("idU") id: Int): Response<List<Order>>
+    suspend fun getListOder(@Path("idU") id: Int): Response<JsonElement>
 
     @GET("WSLibrary/api/address/all/{idU}")
-    suspend fun getListAddress(@Path("idU") id: Int): Response<List<Address>>
+    suspend fun getListAddress(@Path("idU") id: Int): Response<JsonElement>
 
-    @GET("WSProduct/api/cart/list-invoice-detail/{idI}")
-    suspend fun getOderDetailById(@Path("idI") id: Int): Response<List<InvoiceDetail>>
+    @GET("WSProduct/api/cart/list-invoice-detail/{idO}")
+    suspend fun getOderDetailById(@Path("idO") id: Int): Response<JsonElement>
 }

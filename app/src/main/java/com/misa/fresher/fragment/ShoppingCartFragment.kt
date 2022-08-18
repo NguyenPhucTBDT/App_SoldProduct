@@ -1,5 +1,6 @@
 package com.misa.fresher.fragment
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.graphics.Color
@@ -34,12 +35,12 @@ import java.text.DecimalFormat
 class ShoppingCartFragment : Fragment() {
     private var listShoppingCart = arrayListOf<Cart>()
     private val viewModel: UserViewModel by activityViewModels()
-    private var idU: Int? = 0
     private val decimal = DecimalFormat("0,000.0")
     private val binding: FragmentShoppingCartBinding by lazy {
         FragmentShoppingCartBinding.inflate(layoutInflater)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.customer.observe(viewLifecycleOwner, Observer<User> {
@@ -57,6 +58,7 @@ class ShoppingCartFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initView(idU: Int) {
         val adapter = AdapterShoppingCart(listShoppingCart, requireContext()) {
             deleteAll(
@@ -134,50 +136,6 @@ class ShoppingCartFragment : Fragment() {
                 e.printStackTrace()
             }
 
-        }
-    }
-
-    private fun oderProduct(address: Address) {
-        val api = ApiHelper.getInstance().create(ApiInterface::class.java)
-        viewModel.customer.observe(viewLifecycleOwner,
-            Observer<User> {
-                idU = it.idU
-            })
-        CoroutineScope(IO).launch {
-            val amount = listShoppingCart.sumOf { it.price.toDouble() * it.quantity }
-            val list = ArrayList<InvoiceDetail>()
-            for (i in listShoppingCart) {
-                list.add(
-                    InvoiceDetail(
-                        0,
-                        i.product_id,
-                        i.title.toString(),
-                        i.quantity,
-                        i.price,
-                        ""
-                    )
-                )
-            }
-//            val cart = Cart(idU!!, addressUser.address,addressUser.phone, amount.toFloat(), list)
-//            try {
-//                val response = api.oderProduct(cart)
-//                if (response.isSuccessful && response.body() != null) {
-//                    if (response.body()!!.id == 200) {
-//                        withContext(Main) {
-//                            deleteAll(idU!!)
-//                            activity?.showToast("Đơn hàng được tạo thành công")
-//                        }
-//                    } else {
-//                        withContext(Main) {
-//                            activity?.showToast("Đơn hàng được tạo không thành công")
-//                        }
-//                    }
-//                } else {
-//                    Log.e("errr", response.errorBody().toString())
-//                }
-//            } catch (e: Exception) {
-//                e.printStackTrace()
-//            }
         }
     }
 

@@ -103,4 +103,7 @@
     <string name="address_receive">Địa chỉ giao hàng</string>
     <string name="user_info">Thông tin cá nhân</string>
     <string name="log_out">Đăng xuất</string>
+    <string name="order">Đặt hàng</string>
+    <string name="status">Trạng thái :</string>
+    <string name="all_order">Tổng tiền :</string>
 </resources>

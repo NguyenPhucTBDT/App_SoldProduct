@@ -43,6 +43,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/ll_bottom"
@@ -66,9 +67,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_map_pin"
+                    android:gravity="center_vertical"
                     android:text=" Địa chỉ nhận hàng"
                     android:textColor="@color/black"
-                    android:gravity="center_vertical"
                     android:textSize="@dimen/ts20" />
 
                 <LinearLayout
@@ -162,13 +163,15 @@
                 android:textSize="@dimen/ts20" />
         </LinearLayout>
 
-        <TextView
+        <Button
+            android:id="@+id/btn_order"
+            android:textAllCaps="false"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:background="@color/red"
             android:gravity="center"
-            android:text="Đặt hàng"
+            android:text="@string/order"
             android:textColor="@color/white"
             android:textSize="@dimen/ts20" />
 

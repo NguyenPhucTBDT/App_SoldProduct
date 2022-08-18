@@ -39,9 +39,6 @@
             app:popExitAnim="@anim/anim_slide_out_left"
             app:destination="@id/productDetailFragment" />
         <action
-            android:id="@+id/action_saleFragment_to_oderFragment"
-            app:destination="@id/oderFragment" />
-        <action
             app:enterAnim="@anim/anim_slide_in_left"
             app:exitAnim="@anim/anim_slide_out_right"
             android:id="@+id/action_saleFragment_to_addressUserFragment"
@@ -74,9 +71,6 @@
         android:name="com.misa.fresher.fragment.ShoppingCartFragment"
         android:label="fragment_shopping_cart"
         tools:layout="@layout/fragment_shopping_cart" >
-        <action
-            android:id="@+id/action_shoppingCartFragment_to_addressUserFragment"
-            app:destination="@id/addressUserFragment" />
         <action
             android:id="@+id/action_shoppingCartFragment_to_oderFragment"
             app:destination="@id/oderFragment" />
@@ -124,6 +118,11 @@
         <action
             android:id="@+id/action_oderFragment_to_paymentMethodFragment"
             app:destination="@id/paymentMethodFragment" />
+        <action
+            app:popUpTo="@+id/saleFragment"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_oderFragment_to_saleFragment"
+            app:destination="@id/saleFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentMethodFragment"
