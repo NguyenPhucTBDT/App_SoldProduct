@@ -17,10 +17,10 @@
         <ImageView
             android:id="@+id/imgLogoMisa"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/d100"
+            android:layout_height="150dp"
             android:layout_alignParentTop="true"
             android:layout_centerInParent="true"
-            android:layout_marginTop="@dimen/d50"
+            android:layout_marginTop="@dimen/d100"
             android:src="@drawable/logo" />
 
     </RelativeLayout>
@@ -123,6 +123,7 @@
             android:layout_weight="2"
             app:endIconMode="clear_text"
             app:hintEnabled="false"
+            android:visibility="gone"
             app:startIconDrawable="@drawable/ic_baseline_phone_24"
             app:startIconTint="@color/violet_dark">
 
@@ -142,6 +143,7 @@
             android:layout_weight="2"
             app:endIconMode="clear_text"
             app:hintEnabled="false"
+            android:visibility="gone"
             app:startIconDrawable="@drawable/ic_baseline_email_24"
             app:startIconTint="@color/violet_dark">
 

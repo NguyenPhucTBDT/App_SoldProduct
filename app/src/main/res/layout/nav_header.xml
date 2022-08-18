@@ -23,15 +23,6 @@
             android:layout_marginEnd="@dimen/d15"
             android:background="@android:color/transparent"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/tv_full_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:textColor="@color/violet_dark"
-                android:textSize="@dimen/ts16"
-                android:textStyle="bold" />
             <TextView
                 android:id="@+id/tv_login"
                 android:layout_width="match_parent"
@@ -39,14 +30,16 @@
                 android:gravity="center"
                 android:text="Đăng nhập"
                 android:textColor="@color/violet_dark"
-                android:textSize="@dimen/ts16"
+                android:textSize="@dimen/ts20"
                 android:textStyle="bold" />
             <TextView
-                android:id="@+id/tv_id"
+                android:id="@+id/tv_full_name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:textColor="@color/violet_dark"
-                android:textSize="@dimen/ts16" />
+                android:textSize="@dimen/ts20"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 

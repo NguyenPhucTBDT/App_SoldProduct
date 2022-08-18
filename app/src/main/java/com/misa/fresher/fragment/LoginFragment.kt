@@ -1,4 +1,4 @@
-package com.misa.fresher.login
+package com.misa.fresher.fragment
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -8,13 +8,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.gson.Gson
 import com.misa.fresher.R
-import com.misa.fresher.databinding.ActivityLoginBinding
+import com.misa.fresher.databinding.FragmentLoginBinding
+import com.misa.fresher.model.Messenger
 import com.misa.fresher.model.User
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
@@ -26,13 +27,12 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 
 class LoginFragment : Fragment() {
-    private val binding: ActivityLoginBinding by lazy { getInflater(layoutInflater) }
-    val getInflater: (LayoutInflater) -> ActivityLoginBinding
-        get() = ActivityLoginBinding::inflate
-    var viewModel: UserViewModel? = null
+    private val binding: FragmentLoginBinding by lazy { getInflater(layoutInflater) }
+    val getInflater: (LayoutInflater) -> FragmentLoginBinding
+        get() = FragmentLoginBinding::inflate
+    val viewModel: UserViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,7 +43,6 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(UserViewModel::class.java)
         binding.btnLogin.setOnClickListener {
             signIn()
         }
@@ -62,14 +61,14 @@ class LoginFragment : Fragment() {
     private fun signIn() {
         val user = User(
             0,
-            binding.tietUsername.text.toString(),
-            binding.tietPassword.text.toString(),
+            binding.tietUsername.text.toString().trim(),
+            binding.tietPassword.text.toString().trim(),
             "",
             "",
             ""
         )
         val resIn = ApiHelper.getInstance().create(ApiInterface::class.java)
-        if (binding.tietUsername.text.toString().isEmpty() || binding.tietPassword.text.toString()
+        if (binding.tietUsername.text.toString().trim().isEmpty() || binding.tietPassword.text.toString().trim()
                 .isEmpty()
         ) {
             activity?.showToast("Tài khoản/mật khẩu không được để trống!")
@@ -83,22 +82,26 @@ class LoginFragment : Fragment() {
                     if (signIn.isSuccessful && signIn.body() != null) {
                         withContext(Main) {
                             val body = signIn.body()
-                            if (signIn.code() == 200) {
-                                findNavController().navigate(
-                                    R.id.action_loginFragment_to_saleFragment, bundleOf(
-                                        Pair("id", body!!.idU), Pair("name", body.fullname),Pair("phone",body.phone),
-                                        Pair("email",body.email)
-                                    )
-                                )
-                            } else {
-                                activity?.showToast("Thông tin tài khoản không chính xác")
-                                binding.flProgessBarSignIn.isVisible = false
-                            }
+                            val user = Gson().fromJson(body, User::class.java)
+                            viewModel.addUser(user)
+                            activity?.showToast("Đăng nhập thành công")
+                            activity?.onBackPressed()
                         }
                     } else {
-                        withContext(Dispatchers.Main) {
-                            activity?.showToast(signIn.errorBody().toString())
-                            binding.flProgessBarSignIn.isVisible = false
+                        withContext(Main) {
+                            val code = signIn.code()
+                            if(code == 404) {
+                                val messenger = Gson().fromJson(
+                                    signIn.errorBody()!!.charStream(),
+                                    Messenger::class.java
+                                )
+                                activity?.showToast(messenger.msg)
+                                binding.flProgessBarSignIn.isVisible = false
+                            }
+                            else {
+                                activity?.showToast("Có lỗi xảy ra, vui lòng thử lại")
+                                binding.flProgessBarSignIn.isVisible = false
+                            }
                         }
                     }
                 } catch (e: Exception) {

@@ -84,7 +84,7 @@
                         android:layout_marginVertical="@dimen/d3"
                         android:text="Nguyễn Phúc | 0368894608"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/ts20" />
+                        android:textSize="@dimen/ts18" />
 
                     <TextView
                         android:id="@+id/tv_address"
@@ -93,7 +93,7 @@
                         android:layout_marginVertical="@dimen/d3"
                         android:text="Ngõ 61 Phùng Chí Kiên, Cầu Giấy, Hà Nội"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/ts20" />
+                        android:textSize="@dimen/ts18" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -125,7 +125,7 @@
                     android:layout_marginStart="@dimen/d15"
                     android:text="Thanh toán khi nhận hàng"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/ts20" />
+                    android:textSize="@dimen/ts18" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

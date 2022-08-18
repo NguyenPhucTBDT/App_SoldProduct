@@ -26,4 +26,5 @@
     <dimen name="dp_170">170dp</dimen>
     <dimen name="dp_250">250dp</dimen>
     <dimen name="ts_14">14sp</dimen>
+    <dimen name="ts18">18sp</dimen>
 </resources>

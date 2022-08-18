@@ -31,5 +31,17 @@
         app:menu="@menu/main_sale"
         app:itemTextColor="@color/violet_dark"
         app:itemTextAppearance="@style/CustomTextStyle"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/btn_log_out"
+            android:text="@string/log_out"
+            android:layout_marginHorizontal="@dimen/d25"
+            android:layout_marginBottom="@dimen/de10"
+            android:background="@drawable/border_button_payment"
+            android:textAllCaps="false"
+            android:textSize="@dimen/ts20"
+            android:layout_gravity="bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

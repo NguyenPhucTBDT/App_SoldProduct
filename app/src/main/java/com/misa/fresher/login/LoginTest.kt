@@ -12,16 +12,16 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
+import com.misa.fresher.databinding.FragmentLoginBinding
 import com.misa.fresher.signup.SignUpFragment
-import com.misa.fresher.databinding.ActivityLoginBinding
 import com.misa.fresher.model.User
 import com.misa.fresher.showToast
 import com.misa.fresher.viewmodel.UserViewModel
 
 class LoginTest : AppCompatActivity(), LoginContract.View {
-    private val binding: ActivityLoginBinding by lazy { getInflater(layoutInflater) }
-    val getInflater: (LayoutInflater) -> ActivityLoginBinding
-        get() = ActivityLoginBinding::inflate
+    private val binding: FragmentLoginBinding by lazy { getInflater(layoutInflater) }
+    val getInflater: (LayoutInflater) -> FragmentLoginBinding
+        get() = FragmentLoginBinding::inflate
     private var mPresenter: LoginPresenter? = null
     private var viewModel : UserViewModel? = null
     override fun onCreate(savedInstanceState: Bundle?) {

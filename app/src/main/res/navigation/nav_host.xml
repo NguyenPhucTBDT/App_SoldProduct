@@ -18,19 +18,35 @@
             app:popExitAnim="@anim/anim_slide_out_left"
             app:destination="@id/listBillsFragment" />
         <action
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
             android:id="@+id/action_saleFragment_to_shoppingCartFragment"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left"
             app:destination="@id/shoppingCartFragment" />
         <action
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
             android:id="@+id/action_saleFragment_to_loginFragment"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left"
             app:destination="@id/loginFragment" />
         <action
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
             android:id="@+id/action_saleFragment_to_productDetailFragment"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left"
             app:destination="@id/productDetailFragment" />
         <action
             android:id="@+id/action_saleFragment_to_oderFragment"
             app:destination="@id/oderFragment" />
         <action
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
             android:id="@+id/action_saleFragment_to_addressUserFragment"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left"
             app:destination="@id/addressUserFragment" />
     </fragment>
     <fragment
@@ -77,7 +93,7 @@
         tools:layout="@layout/fragment_oder_detail" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.misa.fresher.login.LoginFragment"
+        android:name="com.misa.fresher.fragment.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_saleFragment"

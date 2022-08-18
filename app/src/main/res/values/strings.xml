@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">fresher</string>
+    <string name="app_name">An Nam Food</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hint_search">Enter name,SKU code,Serial/IMEI</string>
     <string name="customer_infor">Customer ID,name,phone number</string>
@@ -94,8 +94,7 @@
         <item>M</item>
         <item>XXL</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
     <string name="ok">Đồng ý</string>
     <string name="cancel">Hủy</string>
     <string name="confirm_delete">Xác nhận xóa</string>
@@ -103,4 +102,5 @@
     <string name="cart">Giỏ hàng</string>
     <string name="address_receive">Địa chỉ giao hàng</string>
     <string name="user_info">Thông tin cá nhân</string>
+    <string name="log_out">Đăng xuất</string>
 </resources>

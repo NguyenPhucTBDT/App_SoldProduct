@@ -42,7 +42,7 @@ import kotlin.collections.ArrayList
 class SaleFragment : Fragment() {
     private val binding: FragmentSaleBinding by lazy { FragmentSaleBinding.inflate(layoutInflater) }
     var products: ArrayList<Product>? = null
-    var idU: Int? = 0
+    var idU: Int = 0
     val viewModel: UserViewModel by activityViewModels()
     private var categories: ArrayList<Category>? = null
     var adapterProduct: AdapterProduct? = null
@@ -57,7 +57,7 @@ class SaleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getListVegetable()
-        searchProduct(view)
+        //searchProduct(view)
         configFilter(view)
         getListVegetable()
         refresh()
@@ -82,13 +82,13 @@ class SaleFragment : Fragment() {
     }
 
     private fun initView() {
-        val idU = arguments?.getInt("id")
-        val name = arguments?.getString("name")
-        val phone = arguments?.getString("phone")
-        val email = arguments?.getString("email")
-        if (idU != null && name != null && phone != null && email != null) {
-            (activity as MainActivity).initView(name)
-            viewModel.addUser(User(idU, "", "", name, phone, email))
+        viewModel.customer.observe(viewLifecycleOwner) {
+            if (it.idU != 0) {
+                idU = it.idU
+                (activity as MainActivity).initView(it.fullname)
+            } else {
+                idU = 0
+            }
         }
     }
 
@@ -186,27 +186,40 @@ class SaleFragment : Fragment() {
         navigationView?.setNavigationItemSelectedListener { it ->
             when (it.itemId) {
                 R.id.mnBill -> {
-                    findNavController().navigate(
-                        R.id.action_saleFragment_to_listBillsFragment
-                    )
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    if (idU != 0) {
+                        findNavController().navigate(
+                            R.id.action_saleFragment_to_listBillsFragment
+                        )
+                        drawerLayout.closeDrawer(GravityCompat.START)
+                    } else {
+                        activity?.showToast("Vui lòng đăng nhập")
+                    }
                 }
                 R.id.mnShoppingCart -> {
-                    findNavController().navigate(
-                        R.id.action_saleFragment_to_shoppingCartFragment
-                    )
-                    drawerLayout.closeDrawer(GravityCompat.START)
+                    if (idU != 0) {
+                        findNavController().navigate(
+                            R.id.action_saleFragment_to_shoppingCartFragment
+                        )
+                        drawerLayout.closeDrawer(GravityCompat.START)
+                    } else {
+                        activity?.showToast("Vui lòng đăng nhập")
+                    }
                 }
                 R.id.mnAddress -> {
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                    findNavController().navigate(
-                        R.id.action_saleFragment_to_addressUserFragment,
-                        bundleOf(Pair("type", 1))
-                    )
+                    if (idU != 0) {
+                        findNavController().navigate(
+                            R.id.action_saleFragment_to_addressUserFragment,
+                            bundleOf(Pair("type", 1))
+                        )
+                        drawerLayout.closeDrawer(GravityCompat.START)
+                    } else {
+                        activity?.showToast("Vui lòng đăng nhập")
+                    }
                 }
             }
             true
         }
+        (activity as MainActivity).logOut()
     }
 
     /**
@@ -225,7 +238,11 @@ class SaleFragment : Fragment() {
             binding.dlFilter.openDrawer(Gravity.RIGHT)
         }
         view.findViewById<ImageButton>(R.id.imbCart)?.setOnClickListener {
-            findNavController().navigate(R.id.action_saleFragment_to_shoppingCartFragment)
+            if (idU == 0) {
+                activity?.showToast("Vui lòng đăng nhập")
+            } else {
+                findNavController().navigate(R.id.action_saleFragment_to_shoppingCartFragment)
+            }
         }
         val btnSave = view.findViewById<Button>(R.id.btnDone)
         val btnClear = view.findViewById<Button>(R.id.btnClearnFilter)

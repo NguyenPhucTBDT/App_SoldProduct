@@ -1,6 +1,5 @@
 package com.misa.fresher.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,7 +19,6 @@ import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.AdapterOderInfo
 import com.misa.fresher.databinding.FragmentListOrdersBinding
-import com.misa.fresher.login.LoginFragment
 import com.misa.fresher.model.Invoice
 import com.misa.fresher.model.User
 import com.misa.fresher.retrofit.ApiHelper

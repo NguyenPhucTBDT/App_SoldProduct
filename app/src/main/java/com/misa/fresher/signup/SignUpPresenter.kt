@@ -1,5 +1,7 @@
 package com.misa.fresher.signup
 
+import com.google.gson.Gson
+import com.misa.fresher.model.Messenger
 import com.misa.fresher.model.User
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
@@ -9,6 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.Exception
+import kotlin.math.sign
 
 class SignUpPresenter : SignUpContract.Presenter {
     private var mSignUpView: SignUpContract.View? = null
@@ -27,17 +30,16 @@ class SignUpPresenter : SignUpContract.Presenter {
                 if (signUp.isSuccessful && signUp.body() != null) {
                     withContext(Dispatchers.Main)
                     {
-                        if (signUp.body()!!.id == 104) {
-                            mSignUpView?.signUpSuccess()
-                        } else {
-                            mSignUpView?.showErrorMessage("Đăng ký tài khoản thất bại!")
-                            mSignUpView?.showProgressBar()
-                        }
+                        val msg = Gson().fromJson(signUp.body(),Messenger::class.java)
+                        mSignUpView?.showErrorMessage(msg.msg)
+                        mSignUpView?.signUpSuccess()
+                        mSignUpView?.showProgressBar()
                     }
                 } else {
                     withContext(Dispatchers.Main) {
+                        val msg = Gson().fromJson(signUp.errorBody()!!.charStream(),Messenger::class.java)
                         mSignUpView?.showProgressBar()
-                        mSignUpView?.showErrorMessage(signUp.errorBody().toString())
+                        mSignUpView?.showErrorMessage(msg.msg)
                     }
                 }
             } catch (e: Exception) {

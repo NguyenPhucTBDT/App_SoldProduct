@@ -1,6 +1,6 @@
 package com.misa.fresher.model
 
-class Product_Detail(
+class ProductDetail(
     val product_id: Int,
     val product_name: String,
     val description: String,
