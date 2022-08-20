@@ -20,6 +20,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.navigation.NavigationView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.AdapterCate
@@ -216,6 +218,16 @@ class SaleFragment : Fragment() {
                         activity?.showToast("Vui lòng đăng nhập")
                     }
                 }
+                R.id.mnUser -> {
+                    if (idU != 0) {
+                        findNavController().navigate(
+                            R.id.action_saleFragment_to_userInfoFragment,
+                        )
+                        drawerLayout.closeDrawer(GravityCompat.START)
+                    } else {
+                        activity?.showToast("Vui lòng đăng nhập")
+                    }
+                }
             }
             true
         }
@@ -312,7 +324,8 @@ class SaleFragment : Fragment() {
                 val response = api.getListProduct()
                 if (response.isSuccessful && response.body() != null) {
                     withContext(Main) {
-                        products = response.body() as ArrayList<Product>?
+                        val body = Gson().fromJson(response.body(),object : TypeToken<List<Product>>() {}.type) as ArrayList<Product>
+                        products = body
                         products?.let { setUpView(it) }
                     }
                 } else {
@@ -342,6 +355,5 @@ class SaleFragment : Fragment() {
             }
         }
     }
-
 }
 

@@ -1,4 +1,4 @@
-package com.misa.fresher.signup
+package com.misa.fresher.fragment
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -8,8 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.misa.fresher.databinding.FragmentSignInBinding

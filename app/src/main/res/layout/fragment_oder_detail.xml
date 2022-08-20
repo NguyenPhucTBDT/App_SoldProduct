@@ -31,7 +31,7 @@
             android:gravity="center"
             android:text="Chi tiết đơn hàng"
             android:textColor="@color/white"
-            android:textSize="@dimen/ts20" />
+            android:textSize="@dimen/ts18" />
 
         <ImageButton
             android:id="@+id/imb_cart"
@@ -44,14 +44,16 @@
     </LinearLayout>
 
     <ScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/d5">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/de10">
+            android:background="@drawable/border_product_item"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -60,12 +62,12 @@
                 android:padding="@dimen/d5">
 
                 <TextView
+                    android:layout_marginStart="@dimen/d5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:text="Mã đơn hàng : "
-                    android:textSize="@dimen/ts20"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/ts18" />
 
                 <TextView
                     android:id="@+id/tv_oder_id"
@@ -73,9 +75,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
                     android:text="100"
-                    android:textSize="@dimen/ts20"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/ts18" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorLightGray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -84,12 +90,12 @@
                 android:padding="@dimen/d5">
 
                 <TextView
+                    android:layout_marginStart="@dimen/d5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.4"
                     android:text="Người nhận : "
-                    android:textSize="@dimen/ts20"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/ts18" />
 
                 <TextView
                     android:id="@+id/tv_full_name"
@@ -97,9 +103,13 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
                     android:text="Nguyễn Cảnh Phúc"
-                    android:textSize="@dimen/ts20"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/ts18" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorLightGray" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -108,12 +118,12 @@
                 android:padding="@dimen/d5">
 
                 <TextView
+                    android:layout_marginStart="@dimen/d5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.15"
                     android:text="SĐT : "
-                    android:textSize="@dimen/ts20"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/ts18" />
 
                 <TextView
                     android:id="@+id/tv_phone"
@@ -121,34 +131,52 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
                     android:text="0368894608"
-                    android:textSize="@dimen/ts20"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/ts18"
+                    />
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorLightGray" />
+
             <TextView
+                android:padding="@dimen/d5"
                 android:id="@+id/tv_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="3"
+                android:layout_marginStart="@dimen/d5"
                 android:text="Địa chỉ giao hàng : "
-                android:textSize="@dimen/ts20"
-                android:textStyle="bold" />
+                android:textSize="@dimen/ts18" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorLightGray" />
 
             <TextView
+                android:padding="@dimen/d5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="3"
-                android:padding="@dimen/d5"
-                android:text="Thông tin sản phẩm"
+                android:layout_marginStart="@dimen/d5"
+                android:text="Thông tin sản phẩm : "
                 android:textColor="@color/violet_dark"
-                android:textSize="@dimen/ts20"
-                android:textStyle="bold" />
+                android:textSize="@dimen/ts18" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/colorLightGray" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcv_oder_detail"
+                android:layout_marginVertical="@dimen/d5"
+                android:layout_marginHorizontal="@dimen/d5"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/border_bottom_sheet" />
+                android:background="@drawable/border_bottom_sheet"
+                android:padding="@dimen/d5" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

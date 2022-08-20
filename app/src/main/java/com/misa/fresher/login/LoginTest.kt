@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentLoginBinding
-import com.misa.fresher.signup.SignUpFragment
+import com.misa.fresher.fragment.SignUpFragment
 import com.misa.fresher.model.User
 import com.misa.fresher.showToast
 import com.misa.fresher.viewmodel.UserViewModel

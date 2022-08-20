@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_login_1"
+    tools:context=".fragment.UserInfoFragment">
+
+    <LinearLayout
+        android:id="@+id/llToolbarBill"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/violet_dark"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_go_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/d5"
+            android:layout_weight="1"
+            android:background="@color/violet_dark"
+            android:src="@drawable/ic_arrow_left" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="8"
+            android:gravity="center"
+            android:text="@string/user_info"
+            android:textColor="@color/white"
+            android:textSize="@dimen/ts18" />
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/d5"
+            android:layout_weight="1"
+            android:background="@color/violet_dark" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/llToolbarBill"
+        android:layout_marginHorizontal="@dimen/de10"
+        android:layout_marginTop="@dimen/d50"
+        android:background="@drawable/bg_form_edit"
+        android:orientation="vertical"
+        android:padding="@dimen/d5">
+
+        <EditText
+            android:id="@+id/edt_fullName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d5"
+            android:drawableStart="@drawable/ic__users"
+            android:inputType="text"
+            android:textColor="@color/violet_dark"
+            android:textSize="@dimen/ts16" />
+
+        <EditText
+            android:id="@+id/edt_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d5"
+            android:drawableStart="@drawable/ic_baseline_phone_24"
+            android:inputType="phone"
+            android:textColor="@color/violet_dark"
+            android:textSize="@dimen/ts16" />
+
+        <EditText
+            android:id="@+id/edt_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d5"
+            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/violet_dark"
+            android:textSize="@dimen/ts16" />
+
+        <Button
+            android:id="@+id/btn_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/d5"
+            android:background="@drawable/border_button_payment"
+            android:text="Cập nhật thông tin"
+            android:textAllCaps="false"
+            android:textSize="@dimen/ts18" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
 import androidx.navigation.findNavController
+import com.example.historyvideokotlin.ui.ProgressBarDialog
 import com.google.android.material.navigation.NavigationView
 import com.misa.fresher.databinding.ActivityMainBinding
 import com.misa.fresher.model.User
@@ -20,10 +21,13 @@ import com.misa.fresher.viewmodel.UserViewModel
 class MainActivity : AppCompatActivity() {
     val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel: UserViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
+    private var progressBarDialog : ProgressBarDialog ? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.btnLogOut.visibility = View.GONE
+        progressBarDialog = ProgressBarDialog(this)
     }
 
     fun openDrawerLayout() {
@@ -49,6 +53,11 @@ class MainActivity : AppCompatActivity() {
                 this.closeDrawer(GravityCompat.START)
             }
         }
+    }
+
+    fun showLoading(isShow : Boolean) {
+        if(isShow) progressBarDialog?.show()
+        else progressBarDialog?.dismiss()
     }
 
     @SuppressLint("SetTextI18n")

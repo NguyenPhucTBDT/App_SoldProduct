@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.gson.Gson
+import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentLoginBinding
 import com.misa.fresher.model.Messenger
@@ -75,7 +76,8 @@ class LoginFragment : Fragment() {
         } else if (!checkForInternet(requireContext())) {
             activity?.showToast("Không có kết nối mạng!")
         } else {
-            binding.flProgessBarSignIn.isVisible = true
+            (activity as MainActivity).showLoading(true)
+            //binding.flProgessBarSignIn.isVisible = true
             CoroutineScope(IO).launch {
                 try {
                     val signIn = resIn.signIn(user)
@@ -84,6 +86,7 @@ class LoginFragment : Fragment() {
                             val body = signIn.body()
                             val user = Gson().fromJson(body, User::class.java)
                             viewModel.addUser(user)
+                            (activity as MainActivity).showLoading(false)
                             activity?.showToast("Đăng nhập thành công")
                             activity?.onBackPressed()
                         }
@@ -95,19 +98,22 @@ class LoginFragment : Fragment() {
                                     signIn.errorBody()!!.charStream(),
                                     Messenger::class.java
                                 )
+                                (activity as MainActivity).showLoading(false)
                                 activity?.showToast(messenger.msg)
-                                binding.flProgessBarSignIn.isVisible = false
+                                //binding.flProgessBarSignIn.isVisible = false
                             }
                             else {
+                                (activity as MainActivity).showLoading(false)
                                 activity?.showToast("Có lỗi xảy ra, vui lòng thử lại")
-                                binding.flProgessBarSignIn.isVisible = false
+                                //.flProgessBarSignIn.isVisible = false
                             }
                         }
                     }
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
                         activity?.showToast(e.message.toString())
-                        binding.flProgessBarSignIn.isVisible = false
+                        (activity as MainActivity).showLoading(false)
+                        //binding.flProgessBarSignIn.isVisible = false
                     }
                 }
             }

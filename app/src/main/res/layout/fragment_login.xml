@@ -204,10 +204,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:background="#80D5CFCF"
+        android:background="@color/color_gray"
         android:layout_alignParentBottom="true"
         android:visibility="gone">
         <ProgressBar
+            android:progressDrawable="@drawable/ic_uploading"
             android:layout_gravity="center"
             android:layout_width="@dimen/d50"
             android:layout_height="@dimen/d50">

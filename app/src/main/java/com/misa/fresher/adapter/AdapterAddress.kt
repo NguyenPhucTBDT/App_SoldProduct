@@ -1,5 +1,6 @@
 package com.misa.fresher.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,10 +22,11 @@ class AdapterAddress(
 
     class ViewHolder(itemView: View, override var clickItemListener: (Address) -> Unit) :
         BaseViewHolder<Address>(itemView) {
+        @SuppressLint("SetTextI18n")
         override fun bindData(item: Address) {
             super.bindData(item)
             itemView.apply {
-                 itemView.findViewById<TextView>(R.id.tv_phone).text = item.phone
+                itemView.findViewById<TextView>(R.id.tv_receiver_info).text = item.name + " | " + item.phone
                 itemView.findViewById<TextView>(R.id.tv_address).text = item.address
             }
         }

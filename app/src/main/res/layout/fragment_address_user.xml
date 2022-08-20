@@ -120,7 +120,7 @@
             android:gravity="center_vertical"
             android:text="@string/add_new_address"
             android:textColor="@color/violet_dark"
-            android:textSize="@dimen/ts20" />
+            android:textSize="@dimen/ts18" />
 
         <ImageButton
             android:visibility="gone"

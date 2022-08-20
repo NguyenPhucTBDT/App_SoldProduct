@@ -20,7 +20,7 @@
             android:layout_margin="@dimen/d5"
             android:layout_weight="1"
             android:background="@color/violet_dark"
-            android:src="@drawable/ic_baseline_menu_24" />
+            android:src="@drawable/ic_arrow_left" />
 
         <TextView
             android:layout_width="0dp"
@@ -76,20 +76,21 @@
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/d5"
             android:text="@string/total"
             android:textColor="@color/black"
-            android:textSize="@dimen/ts16"
+            android:textSize="@dimen/ts18"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvListBillSize"
             android:layout_width="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:layout_marginStart="@dimen/d5"
+            android:textSize="@dimen/ts18"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:background="@drawable/tv_list_bill_border"
@@ -110,6 +111,7 @@
             android:layout_marginBottom="@dimen/d2"
             android:gravity="end"
             android:text="0,0"
+            android:textSize="@dimen/ts18"
             android:textColor="@color/black"
             android:textStyle="bold" />
     </LinearLayout>

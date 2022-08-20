@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentProductDetailBinding
 import com.misa.fresher.model.Cart
-import com.misa.fresher.model.Category
-import com.misa.fresher.model.ShoppingCart
+import com.misa.fresher.model.Messenger
+import com.misa.fresher.model.ProductDetail
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
 import com.misa.fresher.showToast
@@ -30,12 +32,13 @@ class ProductDetailFragment : Fragment() {
             layoutInflater
         )
     }
-    val viewModel : UserViewModel by activityViewModels()
+    val viewModel: UserViewModel by activityViewModels()
     val decimalFormat = DecimalFormat("0,000")
-    var productName : String ?= null
-    var imglink : String ?= null
-    var price : Float?=null
-    var sale_price : Float?=null
+    var productName: String? = null
+    var imglink: String? = null
+    var price: Float? = null
+    var salePrice: Float? = null
+    var idU: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,15 +48,8 @@ class ProductDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupView()
         getProductInfo()
         setUpView()
-    }
-
-    private fun setupView() {
-        binding.ibBack.setOnClickListener {
-            activity?.onBackPressed()
-        }
     }
 
     private fun getProductInfo() {
@@ -63,16 +59,17 @@ class ProductDetailFragment : Fragment() {
             try {
                 val response = api.getProductDetail(idP!!)
                 if (response.isSuccessful && response.body() != null) {
-                    val body = response.body()
+                    val type = object : TypeToken<ProductDetail>() {}.type
+                    val body = Gson().fromJson(response.body(), type) as ProductDetail
                     withContext(Dispatchers.Main) {
-                        Picasso.get().load(body!!.imglink).into(binding.imgProduct)
+                        Picasso.get().load(body.imglink).into(binding.imgProduct)
                         binding.tvProductName.text = body.product_name
                         binding.tvManufacture.text = "Xuất xứ : ${body.manufacture}"
                         binding.tvDescription.text = body.description
                         productName = body.product_name
                         imglink = body.imglink
                         price = body.price
-                        sale_price = body.sale_price
+                        salePrice = body.sale_price
                         if (body.sale_price > 0) {
                             binding.tvSalePrice.apply {
                                 this.text = decimalFormat.format(body.sale_price) + " ₫"
@@ -88,7 +85,7 @@ class ProductDetailFragment : Fragment() {
                                 this.text = decimalFormat.format(body.price) + " ₫"
                                 this.setTextColor(resources.getColor(R.color.red))
                             }
-                            binding.tvSalePrice.visibility = View . GONE
+                            binding.tvSalePrice.visibility = View.GONE
                         }
                     }
                 } else {
@@ -103,7 +100,7 @@ class ProductDetailFragment : Fragment() {
     private fun setUpView() {
         var amount = binding.tvAmount.text.toString().toInt()
         binding.btnAdd.setOnClickListener {
-            amount+=1
+            amount += 1
             binding.tvAmount.text = amount.toString()
         }
         binding.btnSubtract.setOnClickListener {
@@ -115,29 +112,49 @@ class ProductDetailFragment : Fragment() {
             }
         }
         binding.tvAddCart.setOnClickListener {
-            viewModel.customer.observe(viewLifecycleOwner) {
+            if (idU == 0) {
+                activity?.showToast("Vui lòng đăng nhập")
+            } else {
                 val productId = arguments?.getInt("product_id")
-                val cart = Cart(it.idU, productId!!,productName!!,amount,imglink!!,price!!,sale_price!!)
-                addCart(cart,it.idU)
+                val cart = Cart(
+                    idU,
+                    productId!!,
+                    productName!!,
+                    amount,
+                    imglink!!,
+                    price!!,
+                    salePrice!!
+                )
+                addCart(cart)
             }
         }
+        binding.ibBack.setOnClickListener {
+            activity?.onBackPressed()
+        }
+        viewModel.customer.observe(viewLifecycleOwner) {
+            idU = it.idU
+        }
     }
-    private fun addCart(cart: Cart, idU: Int) {
+
+    private fun addCart(cart: Cart) {
         val api = ApiHelper.getInstance().create(ApiInterface::class.java)
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = api.insertShoppingCart(cart, idU)
+                val response = api.insertShoppingCart(cart)
                 if (response.isSuccessful && response.body() != null) {
                     withContext(Dispatchers.Main) {
-                        if (response.body()!!.id == 200) {
-                            activity?.showToast("Thêm vào giỏ hàng thành công")
-                            activity?.onBackPressed()
-                        } else {
-                            activity?.showToast("Thêm vào giỏ hàng thất bại")
-                        }
+                        val body = Gson().fromJson(response.body(), Messenger::class.java)
+                        activity?.showToast(body.msg)
+                        activity?.onBackPressed()
                     }
                 } else {
-                    activity?.showToast("Error : ${response.errorBody()}")
+                    withContext(Dispatchers.Main) {
+                        val errorBody = Gson().fromJson(
+                            response.errorBody()!!.charStream(),
+                            Messenger::class.java
+                        )
+                        activity?.showToast("Error : ${errorBody.msg}")
+                    }
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

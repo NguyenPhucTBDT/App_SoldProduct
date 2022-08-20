@@ -15,6 +15,9 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.historyvideokotlin.ui.ProgressBarDialog
+import com.google.gson.Gson
+import com.misa.fresher.MainActivity
 import com.misa.fresher.R
 import com.misa.fresher.adapter.AdapterShoppingCart
 import com.misa.fresher.databinding.FragmentBillDetailBinding
@@ -120,6 +123,7 @@ class ShoppingCartFragment : Fragment() {
     }
 
     private fun getListShoppingCart(id: Int) {
+        (activity as MainActivity).showLoading(true)
         val api = ApiHelper.getInstance().create(ApiInterface::class.java)
         CoroutineScope(IO).launch {
             try {
@@ -128,9 +132,11 @@ class ShoppingCartFragment : Fragment() {
                     withContext(Main) {
                         listShoppingCart = (response.body() as ArrayList<Cart>?)!!
                         initView(id)
+                        (activity as MainActivity).showLoading(false)
                     }
                 } else {
                     Log.e("errr", response.errorBody().toString())
+                    (activity as MainActivity).showLoading(false)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -152,15 +158,30 @@ class ShoppingCartFragment : Fragment() {
                                 val response = api.deleteByID(idP, idU)
                                 if (response.isSuccessful && response.body() != null) {
                                     withContext(Main) {
-                                        if (response.body()!!.id == 200) {
-                                            dialog.dismiss()
-                                            getListShoppingCart(idU)
-                                        } else {
-                                            activity?.showToast("Xóa không thành công")
-                                        }
+                                        val body =
+                                            Gson().fromJson(response.body(), Messenger::class.java)
+                                        dialog.dismiss()
+                                        activity?.showToast(body.msg)
+                                        getListShoppingCart(idU)
                                     }
                                 } else {
-                                    Log.e("errr", response.errorBody().toString())
+                                    if (response.code() == 404) {
+                                        withContext(Main) {
+                                            val errorBody =
+                                                Gson().fromJson(
+                                                    response.errorBody()?.charStream(),
+                                                    Messenger::class.java
+                                                )
+                                            dialog.dismiss()
+                                            activity?.showToast(errorBody.msg)
+                                        }
+                                    }
+                                    else {
+                                        withContext(Main) {
+                                            dialog.dismiss()
+                                            activity?.showToast("Có lỗi xảy ra, vui lòng thử lại")
+                                        }
+                                    }
                                 }
                             } catch (e: Exception) {
                                 e.printStackTrace()

@@ -58,8 +58,6 @@ class ListOrderFragment : Fragment() {
             getListInvoice(it.idU)
         }
         setUpView()
-        openDrawerLayoutMenu(view)
-        showSaleFragment()
     }
 
     /**
@@ -84,6 +82,9 @@ class ListOrderFragment : Fragment() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.spnPayment.adapter = adapter
         }
+        binding.ibMenuLb.setOnClickListener {
+            activity?.onBackPressed()
+        }
     }
 
     /**
@@ -98,42 +99,6 @@ class ListOrderFragment : Fragment() {
         binding.tvListBillSize.text = mListOrder.size.toString()
         binding.tvListBillAmount.text =
             decimalFormat.format(mListOrder.sumOf { it.amount.toDouble() }).toString()
-    }
-
-    /**
-     *Mở Drawer
-     *@author:NCPhuc
-     *@date:3/18/2022
-     **/
-    private fun openDrawerLayoutMenu(view: View) {
-        binding.ibMenuLb.setOnClickListener {
-            (activity as MainActivity).openDrawerLayout()
-        }
-    }
-
-    /**
-     *Hiển thị SaleFragment
-     *@author:NCPhuc
-     *@date:3/18/2022
-     **/
-    private fun showSaleFragment() {
-        val navigationView = (activity as MainActivity).findViewById<NavigationView>(R.id.nv_menu)
-        val drawerLayout = (activity as MainActivity).findViewById<DrawerLayout>(R.id.dlLeft)
-        navigationView?.setNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.mnSale -> {
-                    findNavController().navigate(R.id.action_listBillsFragment_to_saleFragment)
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                }
-                R.id.mnShoppingCart -> {
-                    findNavController().navigate(
-                        R.id.action_listBillsFragment_to_shoppingCartFragment
-                    )
-                    drawerLayout.closeDrawer(GravityCompat.START)
-                }
-            }
-            true
-        }
     }
 
     /**
@@ -168,7 +133,7 @@ class ListOrderFragment : Fragment() {
             findNavController().navigate(
                 R.id.action_listBillsFragment_to_oderDetailFragment,
                 bundleOf(
-                    Pair("idU", order.idU),
+                    Pair("idO", order.idO),
                     Pair("address", order.address),
                     Pair("phone", order.phone),
                     Pair("name", it.fullname)

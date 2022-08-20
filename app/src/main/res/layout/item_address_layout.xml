@@ -1,28 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="@dimen/d5"
-    android:layout_margin="@dimen/d5"
-    android:background="@drawable/border_bottom_sheet"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        android:text="0368894608"
-        android:id="@+id/tv_phone"
-        android:textSize="@dimen/ts20"
-        android:layout_marginStart="@dimen/de10"
-        android:gravity="center_vertical"
-        android:textColor="@color/violet_dark"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/d3"
+    android:background="@drawable/border_product_item"
+    android:orientation="vertical">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/d50"/>
-    <TextView
-        android:text="Phùng Chí Kiên"
-        android:maxLines="2"
-        android:textSize="@dimen/ts20"
-        android:gravity="center_vertical"
-        android:id="@+id/tv_address"
-        android:textColor="@color/violet_dark"
-        android:layout_margin="@dimen/de10"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/d50"/>
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/d3"
+        android:orientation="vertical"
+        android:padding="@dimen/d5">
+
+        <TextView
+            android:drawableStart="@drawable/ic_baseline_phone_24"
+            android:id="@+id/tv_receiver_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/de10"
+            android:layout_marginBottom="@dimen/d5"
+            android:gravity="center_vertical"
+            android:text="0368894608"
+            android:textColor="@color/violet_dark"
+            android:textSize="@dimen/ts18" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/d2"
+            android:background="@color/colorLightGray" />
+
+        <TextView
+            android:drawableStart="@drawable/ic_map_pin"
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/de10"
+            android:layout_marginTop="@dimen/d5"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:text="Phùng Chí Kiên"
+            android:textColor="@color/violet_dark"
+            android:textSize="@dimen/ts18" />
+    </LinearLayout>
 </LinearLayout>
