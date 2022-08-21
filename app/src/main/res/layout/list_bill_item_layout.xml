@@ -21,6 +21,7 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="@color/violet_dark"
                 android:id="@+id/tv_oder_id"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -31,6 +32,7 @@
                 android:textSize="@dimen/ts18" />
 
             <TextView
+                android:textColor="@color/violet_dark"
                 android:id="@+id/tv_time_order"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -54,12 +56,13 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/d5"
                 android:layout_weight="1"
                 android:text="@string/all_order"
-                android:textSize="@dimen/ts20"
+                android:textSize="@dimen/ts18"
                 android:textStyle="bold" />
 
             <TextView
@@ -83,15 +86,43 @@
             android:orientation="horizontal">
 
             <TextView
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/d5"
                 android:text="@string/status"
-                android:textSize="@dimen/ts20"
+                android:textSize="@dimen/ts18"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_status_order"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="Chờ xử lý"
+                android:textSize="@dimen/ts18" />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/colorLightGray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/d5"
+                android:text="Ghi chú : "
+                android:textSize="@dimen/ts18"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"

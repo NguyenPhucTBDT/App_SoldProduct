@@ -136,9 +136,11 @@ class ListOrderFragment : Fragment() {
                     Pair("idO", order.idO),
                     Pair("address", order.address),
                     Pair("phone", order.phone),
-                    Pair("name", it.fullname)
+                    Pair("name", it.fullname),
+                    Pair("status",order.status)
                 )
             )
         }
     }
+
 }

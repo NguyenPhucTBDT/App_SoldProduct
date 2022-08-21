@@ -1,6 +1,8 @@
 package com.misa.fresher.fragment
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,14 +10,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.misa.fresher.R
 import com.misa.fresher.adapter.AdapterAddress
 import com.misa.fresher.databinding.FragmentAddressUserBinding
 import com.misa.fresher.model.Address
+import com.misa.fresher.model.Messenger
 import com.misa.fresher.model.Order
 import com.misa.fresher.model.User
 import com.misa.fresher.retrofit.ApiHelper
@@ -57,7 +63,8 @@ class AddressUserFragment : Fragment() {
     }
 
     private fun setupView(list: List<Address>) {
-        val adapterAddress = AdapterAddress(list as ArrayList<Address>) { chooseAddress(it) }
+        val adapterAddress =
+            AdapterAddress(list as ArrayList<Address>, { chooseAddress(it) }, { deleteAdd(it) })
         binding.rvSelectedProduct.adapter = adapterAddress
         binding.rvSelectedProduct.layoutManager = LinearLayoutManager(requireContext())
     }
@@ -96,13 +103,28 @@ class AddressUserFragment : Fragment() {
         } else if (type == TYPE_CHOOSE_ADDRESS) {
             binding.tvBillCode.text = "Chọn địa chỉ nhận hàng"
         }
+        binding.tvAddAddress.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_addressUserFragment_to_addressInfoFragment,
+                bundleOf(Pair("type", 1))
+            )
+        }
     }
 
-    private fun chooseAddress(address: Address) {
+    private fun chooseAddress(a: Address) {
         if (type == TYPE_GET_ADDRESS) {
-            activity?.showToast("Tesst")
+            findNavController().navigate(
+                R.id.action_addressUserFragment_to_addressInfoFragment,
+                bundleOf(
+                    Pair("idA", a.idA),
+                    Pair("address", a.address),
+                    Pair("name", a.name),
+                    Pair("phone", a.phone),
+                    Pair("type", "2")
+                )
+            )
         } else if (type == TYPE_CHOOSE_ADDRESS) {
-            viewModel.addAddress(address)
+            viewModel.addAddress(a)
             activity?.onBackPressed()
         }
     }
@@ -111,5 +133,53 @@ class AddressUserFragment : Fragment() {
         const val TYPE_GET_ADDRESS = 1
         const val TYPE_CHOOSE_ADDRESS = 2
         const val TYPE = "type"
+    }
+
+    private fun deleteAdd(address: Address) {
+        val alertDialog: AlertDialog? = activity?.let {
+            val builder = AlertDialog.Builder(it)
+            builder.apply {
+                setMessage(R.string.confirm_delete)
+                setPositiveButton(
+                    R.string.ok,
+                    DialogInterface.OnClickListener { dialog, id ->
+                        val api = ApiHelper.getInstance().create(ApiInterface::class.java)
+                        CoroutineScope(IO).launch {
+                            val response = api.deleteAddress(address.idA)
+                            try {
+                                if (response.isSuccessful && response.body() != null) {
+                                    withContext(Main) {
+                                        val body =
+                                            Gson().fromJson(response.body(), Messenger::class.java)
+                                        activity?.showToast(body.msg)
+                                        getListAddress()
+                                    }
+                                } else {
+                                    withContext(Main) {
+                                        if (response.code() == 404) {
+                                            val errorBody = Gson().fromJson(
+                                                response.errorBody()?.charStream(),
+                                                Messenger::class.java
+                                            )
+                                            activity?.showToast(errorBody.msg)
+                                        } else {
+                                            activity?.showToast("Có lỗi xảy ra. Vui lòng thử lại")
+                                        }
+                                    }
+                                }
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                    })
+                setNegativeButton(
+                    R.string.cancel,
+                    DialogInterface.OnClickListener { dialog, id ->
+
+                    })
+            }
+            builder.create()
+        }
+        alertDialog!!.show()
     }
 }

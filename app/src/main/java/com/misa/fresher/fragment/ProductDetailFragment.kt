@@ -1,5 +1,6 @@
 package com.misa.fresher.fragment
 
+import android.annotation.SuppressLint
 import android.graphics.Paint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,9 +12,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.misa.fresher.R
 import com.misa.fresher.databinding.FragmentProductDetailBinding
-import com.misa.fresher.model.Cart
-import com.misa.fresher.model.Messenger
-import com.misa.fresher.model.ProductDetail
+import com.misa.fresher.model.*
 import com.misa.fresher.retrofit.ApiHelper
 import com.misa.fresher.retrofit.ApiInterface
 import com.misa.fresher.showToast
@@ -52,6 +51,7 @@ class ProductDetailFragment : Fragment() {
         setUpView()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun getProductInfo() {
         val idP = arguments?.getInt("product_id")
         val api = ApiHelper.getInstance().create(ApiInterface::class.java)
@@ -145,15 +145,18 @@ class ProductDetailFragment : Fragment() {
                     withContext(Dispatchers.Main) {
                         val body = Gson().fromJson(response.body(), Messenger::class.java)
                         activity?.showToast(body.msg)
-                        activity?.onBackPressed()
                     }
                 } else {
                     withContext(Dispatchers.Main) {
-                        val errorBody = Gson().fromJson(
-                            response.errorBody()!!.charStream(),
-                            Messenger::class.java
-                        )
-                        activity?.showToast("Error : ${errorBody.msg}")
+                        if (response.code() == 404) {
+                            val errorBody = Gson().fromJson(
+                                response.errorBody()?.charStream(),
+                                Messenger::class.java
+                            )
+                            activity?.showToast(errorBody.msg)
+                        } else {
+                            activity?.showToast(response.errorBody().toString())
+                        }
                     }
                 }
             } catch (e: Exception) {

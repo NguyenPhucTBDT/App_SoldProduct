@@ -106,4 +106,5 @@
     <string name="order">Đặt hàng</string>
     <string name="status">Trạng thái :</string>
     <string name="all_order">Tổng tiền :</string>
+    <string name="note">Ghi chú : </string>
 </resources>

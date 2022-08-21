@@ -111,7 +111,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/tvBuyMore"
+            android:id="@+id/tv_add_address"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4.5"
@@ -120,7 +120,7 @@
             android:gravity="center_vertical"
             android:text="@string/add_new_address"
             android:textColor="@color/violet_dark"
-            android:textSize="@dimen/ts18" />
+            android:textSize="@dimen/ts20" />
 
         <ImageButton
             android:visibility="gone"

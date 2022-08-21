@@ -23,12 +23,14 @@ class AdapterOderInfo(
         private val tvTime = binding.tvTimeOrder
         private val tvStatus = binding.tvStatusOrder
         private val llListOder = binding.llListOder
+        private val tvNote = binding.tvNote
 
         @SuppressLint("SetTextI18n")
         fun bind(order: Order) {
             tvBillNum.text = order.idO.toString()
             tvBillAmount.text = decimalFormat.format(order.amount).toString() + " ₫"
             tvBillAmount.setTextColor(Color.RED)
+            tvNote.text = order.note
             tvTime.text = order.time_order
             when (order.status) {
                 TYPE_1 -> {

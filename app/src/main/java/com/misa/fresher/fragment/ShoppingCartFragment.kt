@@ -165,21 +165,10 @@ class ShoppingCartFragment : Fragment() {
                                         getListShoppingCart(idU)
                                     }
                                 } else {
-                                    if (response.code() == 404) {
-                                        withContext(Main) {
-                                            val errorBody =
-                                                Gson().fromJson(
-                                                    response.errorBody()?.charStream(),
-                                                    Messenger::class.java
-                                                )
-                                            dialog.dismiss()
+                                    withContext(Main) {
+                                        if(response.code() == 404) {
+                                            val errorBody = Gson().fromJson(response.errorBody()?.charStream(),Messenger::class.java)
                                             activity?.showToast(errorBody.msg)
-                                        }
-                                    }
-                                    else {
-                                        withContext(Main) {
-                                            dialog.dismiss()
-                                            activity?.showToast("Có lỗi xảy ra, vui lòng thử lại")
                                         }
                                     }
                                 }

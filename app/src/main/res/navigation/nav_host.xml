@@ -9,49 +9,45 @@
         android:id="@+id/saleFragment"
         android:name="com.misa.fresher.fragment.SaleFragment"
         android:label="fragment_sale"
-        tools:layout="@layout/fragment_sale">
+        tools:layout="@layout/fragment_sale" >
         <action
+            app:enterAnim="@anim/anim_slide_in_left"
+            app:exitAnim="@anim/anim_slide_out_right"
             android:id="@+id/action_saleFragment_to_listBillsFragment"
-            app:destination="@id/listBillsFragment"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left"
+            app:destination="@id/listBillsFragment" />
+        <action
             app:enterAnim="@anim/anim_slide_in_left"
             app:exitAnim="@anim/anim_slide_out_right"
-            app:popEnterAnim="@anim/anim_slide_in_right"
-            app:popExitAnim="@anim/anim_slide_out_left" />
-        <action
             android:id="@+id/action_saleFragment_to_shoppingCartFragment"
-            app:destination="@id/shoppingCartFragment"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left"
+            app:destination="@id/shoppingCartFragment" />
+        <action
             app:enterAnim="@anim/anim_slide_in_left"
             app:exitAnim="@anim/anim_slide_out_right"
-            app:popEnterAnim="@anim/anim_slide_in_right"
-            app:popExitAnim="@anim/anim_slide_out_left" />
-        <action
             android:id="@+id/action_saleFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
+            app:popEnterAnim="@anim/anim_slide_in_right"
+            app:popExitAnim="@anim/anim_slide_out_left"
+            app:destination="@id/loginFragment" />
+        <action
             app:enterAnim="@anim/anim_slide_in_left"
             app:exitAnim="@anim/anim_slide_out_right"
-            app:popEnterAnim="@anim/anim_slide_in_right"
-            app:popExitAnim="@anim/anim_slide_out_left" />
-        <action
             android:id="@+id/action_saleFragment_to_productDetailFragment"
-            app:destination="@id/productDetailFragment"
-            app:enterAnim="@anim/anim_slide_in_left"
-            app:exitAnim="@anim/anim_slide_out_right"
             app:popEnterAnim="@anim/anim_slide_in_right"
-            app:popExitAnim="@anim/anim_slide_out_left" />
+            app:popExitAnim="@anim/anim_slide_out_left"
+            app:destination="@id/productDetailFragment" />
         <action
-            android:id="@+id/action_saleFragment_to_addressUserFragment"
-            app:destination="@id/addressUserFragment"
             app:enterAnim="@anim/anim_slide_in_left"
             app:exitAnim="@anim/anim_slide_out_right"
+            android:id="@+id/action_saleFragment_to_addressUserFragment"
             app:popEnterAnim="@anim/anim_slide_in_right"
-            app:popExitAnim="@anim/anim_slide_out_left" />
+            app:popExitAnim="@anim/anim_slide_out_left"
+            app:destination="@id/addressUserFragment" />
         <action
             android:id="@+id/action_saleFragment_to_userInfoFragment"
-            app:destination="@id/userInfoFragment"
-            app:enterAnim="@anim/anim_slide_in_left"
-            app:exitAnim="@anim/anim_slide_out_right"
-            app:popEnterAnim="@anim/anim_slide_in_right"
-            app:popExitAnim="@anim/anim_slide_out_left" />
+            app:destination="@id/userInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/billDetailFragment"
@@ -62,7 +58,7 @@
         android:id="@+id/listBillsFragment"
         android:name="com.misa.fresher.fragment.ListOrderFragment"
         android:label="fragment_list_bills"
-        tools:layout="@layout/fragment_list_orders">
+        tools:layout="@layout/fragment_list_orders" >
         <action
             android:id="@+id/action_listBillsFragment_to_oderDetailFragment"
             app:destination="@id/oderDetailFragment" />
@@ -77,7 +73,7 @@
         android:id="@+id/shoppingCartFragment"
         android:name="com.misa.fresher.fragment.ShoppingCartFragment"
         android:label="fragment_shopping_cart"
-        tools:layout="@layout/fragment_shopping_cart">
+        tools:layout="@layout/fragment_shopping_cart" >
         <action
             android:id="@+id/action_shoppingCartFragment_to_oderFragment"
             app:destination="@id/oderFragment" />
@@ -86,7 +82,11 @@
         android:id="@+id/addressUserFragment"
         android:name="com.misa.fresher.fragment.AddressUserFragment"
         android:label="fragment_address_user"
-        tools:layout="@layout/fragment_address_user" />
+        tools:layout="@layout/fragment_address_user" >
+        <action
+            android:id="@+id/action_addressUserFragment_to_addressInfoFragment"
+            app:destination="@id/addressInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/oderDetailFragment"
         android:name="com.misa.fresher.fragment.OderDetailFragment"
@@ -95,12 +95,12 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.misa.fresher.fragment.LoginFragment"
-        android:label="LoginFragment">
+        android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_saleFragment"
-            app:destination="@id/saleFragment"
             app:popUpTo="@+id/saleFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:destination="@id/saleFragment" />
         <action
             android:id="@+id/action_loginFragment_to_signUpActivity"
             app:destination="@id/signUpActivity" />
@@ -118,7 +118,7 @@
         android:id="@+id/oderFragment"
         android:name="com.misa.fresher.fragment.OderFragment"
         android:label="fragment_oder"
-        tools:layout="@layout/fragment_oder">
+        tools:layout="@layout/fragment_oder" >
         <action
             android:id="@+id/action_oderFragment_to_addressUserFragment"
             app:destination="@id/addressUserFragment" />
@@ -126,10 +126,10 @@
             android:id="@+id/action_oderFragment_to_paymentMethodFragment"
             app:destination="@id/paymentMethodFragment" />
         <action
-            android:id="@+id/action_oderFragment_to_saleFragment"
-            app:destination="@id/saleFragment"
             app:popUpTo="@+id/saleFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            android:id="@+id/action_oderFragment_to_saleFragment"
+            app:destination="@id/saleFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentMethodFragment"
@@ -140,11 +140,16 @@
         android:id="@+id/userInfoFragment"
         android:name="com.misa.fresher.fragment.UserInfoFragment"
         android:label="fragment_user_info"
-        tools:layout="@layout/fragment_user_info">
+        tools:layout="@layout/fragment_user_info" >
         <action
-            android:id="@+id/action_userInfoFragment_to_saleFragment"
-            app:destination="@id/saleFragment"
             app:popUpTo="@+id/saleFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            android:id="@+id/action_userInfoFragment_to_saleFragment"
+            app:destination="@id/saleFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addressInfoFragment"
+        android:name="com.misa.fresher.fragment.AddressInfoFragment"
+        android:label="fragment_address_info"
+        tools:layout="@layout/fragment_address_info" />
 </navigation>

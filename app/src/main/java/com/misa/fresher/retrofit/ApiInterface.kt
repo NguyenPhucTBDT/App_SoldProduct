@@ -52,12 +52,12 @@ interface ApiInterface {
     @PUT("WSLibrary/api/user/update")
     suspend fun updateUserInfo(@Body user: User): Response<JsonElement>
 
+    @DELETE("WSLibrary/api/address/delete/{idA}")
+    suspend fun deleteAddress(@Path("idA") idA : Int) : Response<JsonElement>
+
     @POST("WSLibrary/api/address/insert")
-    suspend fun addAddress(@Body address: Address): Response<JsonElement>
+    suspend fun insertAddress(@Body address: Address) : Response<JsonElement>
 
     @PUT("WSLibrary/api/address/update")
-    suspend fun updateAddress(@Body address: Address): Response<JsonElement>
-
-    @DELETE("WSLibrary/api/address/update/{idA}")
-    suspend fun deleteAddress(@Body address: Address): Response<JsonElement>
+    suspend fun updateAddress(@Body address: Address) : Response<JsonElement>
 }
