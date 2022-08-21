@@ -117,11 +117,6 @@ class SaleFragment : Fragment() {
         }
     }
 
-    /**
-     *Hiển thị BottomDialog để chọn số lượng của sản phẩm -> dismiss->thêm sản phẩm chọn vào danh sách
-     *@author:NCPhuc
-     *@date:3/16/2022
-     **/
     private fun showBottomDialog(product: Product) {
         findNavController().navigate(
             R.id.action_saleFragment_to_productDetailFragment,
@@ -129,11 +124,6 @@ class SaleFragment : Fragment() {
         )
     }
 
-    /**
-     *Tìm kiếm sản phẩm khi nhập từ khóa ở toolbar
-     *@author:NCPhuc
-     *@date:3/16/2022
-     **/
     private fun searchProduct(view: View) {
         val txtSearch = view.findViewById<EditText>(R.id.etSearch)
         txtSearch?.doAfterTextChanged {
@@ -141,11 +131,6 @@ class SaleFragment : Fragment() {
         }
     }
 
-    /**
-     *Cập nhật lại danh sách sản phẩm khi tìm kiếm
-     *@author:NCPhuc
-     *@date:3/16/2022
-     **/
     private fun updateList(strSearch: String) {
         val productSearch = mutableListOf<Product>()
         for (i in products!!) {
@@ -158,22 +143,12 @@ class SaleFragment : Fragment() {
         binding.rcvProduct.adapter = adapterProduct
     }
 
-    /**
-     *Mở navigationView ở phía bên trái của màn hình
-     *@author:NCPhuc
-     *@date:3/16/2022
-     **/
     private fun openDrawerLayoutMenu() {
         binding.ibMenu.setOnClickListener {
             (activity as MainActivity).openDrawerLayout()
         }
     }
 
-    /**
-     *Thiết lập điều hướng khi chọn các item của NavigationView
-     *@author:NCPhuc
-     *@date:3/16/2022
-     **/
     private fun setUpNavigation() {
         val navigationView = (activity as MainActivity).findViewById<NavigationView>(R.id.nv_menu)
         val drawerLayout = (activity as MainActivity).findViewById<DrawerLayout>(R.id.dlLeft)
