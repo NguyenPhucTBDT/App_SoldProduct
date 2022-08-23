@@ -31,6 +31,9 @@ interface ApiInterface {
     @GET("WSLibrary/api/cart/all/{idU}")
     suspend fun getShoppingCart(@Path("idU") id: Int): Response<List<Cart>>
 
+    @PUT("WSLibrary/api/cart/update")
+    suspend fun updateShoppingCart(@Body cart: Cart): Response<JsonElement>
+
     @Headers("Content-Type: application/json")
     @POST("WSLibrary/api/cart/insert")
     suspend fun insertShoppingCart(

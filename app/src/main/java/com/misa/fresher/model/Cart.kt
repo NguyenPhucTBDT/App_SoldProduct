@@ -4,7 +4,7 @@ class Cart(
     val idU: Int,
     val product_id: Int,
     val title: String,
-    val quantity: Int,
+    var quantity: Int,
     val imglink: String,
     val price: Float,
     val sale_price: Float
