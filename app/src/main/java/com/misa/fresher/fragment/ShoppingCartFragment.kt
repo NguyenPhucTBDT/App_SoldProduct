@@ -63,12 +63,12 @@ class ShoppingCartFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun initView(idU: Int) {
-        val adapter = AdapterShoppingCart(listShoppingCart, requireContext()) {
+        val adapter = AdapterShoppingCart(listShoppingCart, requireContext(), {
             deleteAll(
                 it.product_id,
                 idU
             )
-        }
+        }, { updateCart(it) })
         binding.rvSelectedProduct.adapter = adapter
         binding.rvSelectedProduct.layoutManager = LinearLayoutManager(requireActivity())
         val total = listShoppingCart.sumOf {
@@ -141,7 +141,6 @@ class ShoppingCartFragment : Fragment() {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
-
         }
     }
 
@@ -166,8 +165,11 @@ class ShoppingCartFragment : Fragment() {
                                     }
                                 } else {
                                     withContext(Main) {
-                                        if(response.code() == 404) {
-                                            val errorBody = Gson().fromJson(response.errorBody()?.charStream(),Messenger::class.java)
+                                        if (response.code() == 404) {
+                                            val errorBody = Gson().fromJson(
+                                                response.errorBody()?.charStream(),
+                                                Messenger::class.java
+                                            )
                                             activity?.showToast(errorBody.msg)
                                         }
                                     }
@@ -185,5 +187,28 @@ class ShoppingCartFragment : Fragment() {
             builder.create()
         }
         alertDialog!!.show()
+    }
+
+    private fun updateCart(cart: Cart) {
+        (activity as MainActivity).showLoading(true)
+        val api = ApiHelper.getInstance().create(ApiInterface::class.java)
+        CoroutineScope(IO).launch {
+            try {
+                val response = api.updateShoppingCart(cart)
+                if (response.isSuccessful && response.body() != null) {
+                    withContext(Main) {
+                        val body = Gson().fromJson(response.body(), Messenger::class.java)
+                        activity?.showToast(body.msg)
+                        getListShoppingCart(cart.idU)
+                        (activity as MainActivity).showLoading(false)
+                    }
+                } else {
+                    Log.e("errr", response.errorBody().toString())
+                    (activity as MainActivity).showLoading(false)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
     }
 }
