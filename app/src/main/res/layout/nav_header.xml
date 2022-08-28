@@ -4,43 +4,34 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:background="@android:color/transparent"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="@dimen/d100"
-            android:layout_height="@dimen/d100"
-            android:layout_margin="@dimen/d25"
-            android:src="@drawable/custom_circle_image" />
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_full_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginEnd="@dimen/d15"
-            android:background="@android:color/transparent"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/tv_login"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Đăng nhập"
-                android:textColor="@color/violet_dark"
-                android:textSize="@dimen/ts20"
-                android:textStyle="bold" />
-            <TextView
-                android:id="@+id/tv_full_name"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:textColor="@color/violet_dark"
-                android:textSize="@dimen/ts20"
-                android:textStyle="bold" />
-        </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/d50"
+            android:gravity="center_horizontal"
+            android:textColor="@color/violet_dark"
+            android:textSize="@dimen/ts20"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_marginTop="@dimen/d50"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Đăng nhập"
+            android:textColor="@color/violet_dark"
+            android:textSize="@dimen/ts20"
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout

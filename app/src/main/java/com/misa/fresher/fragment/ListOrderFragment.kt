@@ -134,9 +134,9 @@ class ListOrderFragment : Fragment() {
                 R.id.action_listBillsFragment_to_oderDetailFragment,
                 bundleOf(
                     Pair("idO", order.idO),
-                    Pair("address", order.address),
-                    Pair("phone", order.phone),
-                    Pair("name", it.fullname),
+                    Pair("address", order.address_receiver),
+                    Pair("phone", order.phone_receiver),
+                    Pair("name", order.name_receiver),
                     Pair("status",order.status)
                 )
             )

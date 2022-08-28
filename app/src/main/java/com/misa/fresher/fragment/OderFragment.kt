@@ -42,6 +42,7 @@ class OderFragment : Fragment() {
     val viewModel: UserViewModel by activityViewModels()
     var address: String? = null
     var phone: String? = null
+    var name: String? = null
     var payment: Int? = 0
     var note: String? = null
     private val paymentModel: PaymentViewModel by activityViewModels()
@@ -91,6 +92,7 @@ class OderFragment : Fragment() {
             binding.tvAddress.text = it.address
             phone = it.phone
             address = it.address
+            name = it.name
         }
         paymentModel.shipItem.observe(viewLifecycleOwner) {
             if (it == PAYMENT_TYPE_1) {
@@ -134,7 +136,7 @@ class OderFragment : Fragment() {
             val format = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
             val oderInfo = OrderInfo(
                 it.idU,
-                address.toString(), phone.toString(), amount.toFloat(), payment!!,
+                address.toString(), phone.toString(),name.toString(), amount.toFloat(), payment!!,
                 "", format.format(date), 1, list
             )
             val api = ApiHelper.getInstance().create(ApiInterface::class.java)

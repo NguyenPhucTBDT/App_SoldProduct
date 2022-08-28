@@ -31,7 +31,7 @@ class AdapterOderDetail(
         fun bind(invoiceDetail: OrderDetail,gone : Boolean) {
             Picasso.get().load(invoiceDetail.imglink).into(img)
             title.text = invoiceDetail.title
-            quantity.text = invoiceDetail.quantity.toString()
+            quantity.text = "Số lượng: ${invoiceDetail.quantity}"
             if (invoiceDetail.sale_price > 0) {
                 price.text = decimalFormat.format(invoiceDetail.sale_price) + " ₫"
             } else {
