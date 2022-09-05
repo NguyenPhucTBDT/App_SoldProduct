@@ -57,7 +57,7 @@ class SaleFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getListVegetable()
-        //searchProduct(view)
+        searchProduct(view)
         configFilter(view)
         getListVegetable()
         refresh()
@@ -153,7 +153,7 @@ class SaleFragment : Fragment() {
         val navigationView = (activity as MainActivity).findViewById<NavigationView>(R.id.nv_menu)
         val drawerLayout = (activity as MainActivity).findViewById<DrawerLayout>(R.id.dlLeft)
         val headerView = navigationView.getHeaderView(0)
-        val tvLogin = headerView.findViewById<TextView>(R.id.tv_login)
+        val tvLogin = headerView.findViewById<TextView>(R.id.tv_full_name)
         tvLogin.setOnClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
             findNavController().navigate(R.id.action_saleFragment_to_loginFragment)

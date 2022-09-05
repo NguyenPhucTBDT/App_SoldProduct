@@ -21,7 +21,7 @@ import com.misa.fresher.viewmodel.UserViewModel
 class MainActivity : AppCompatActivity() {
     val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel: UserViewModel by lazy { ViewModelProvider(this)[UserViewModel::class.java] }
-    private var progressBarDialog : ProgressBarDialog ? = null
+    private var progressBarDialog: ProgressBarDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +44,8 @@ class MainActivity : AppCompatActivity() {
             val nav = binding.nvMenu
             val headerView = nav.getHeaderView(0)
             val tvFullname = headerView.findViewById<TextView>(R.id.tv_full_name)
-            val tvLogin = headerView.findViewById<TextView>(R.id.tv_login)
-            tvFullname.visibility = View.GONE
-            tvLogin.visibility = View.VISIBLE
+            tvFullname.setText(R.string.log_in)
+            tvFullname.isEnabled = true
             binding.btnLogOut.visibility = View.GONE
             binding.dlLeft.run {
                 this.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
@@ -55,8 +54,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showLoading(isShow : Boolean) {
-        if(isShow) progressBarDialog?.show()
+    fun showLoading(isShow: Boolean) {
+        if (isShow) progressBarDialog?.show()
         else progressBarDialog?.dismiss()
     }
 
@@ -65,10 +64,9 @@ class MainActivity : AppCompatActivity() {
         val nav = binding.nvMenu
         val headerView = nav.getHeaderView(0)
         val tvFullname = headerView.findViewById<TextView>(R.id.tv_full_name)
-        val tvLogin = headerView.findViewById<TextView>(R.id.tv_login)
         tvFullname.visibility = View.VISIBLE
         tvFullname.text = "Xin chào, $name"
-        tvLogin.visibility = View.GONE
+        tvFullname.isEnabled = false
         binding.btnLogOut.visibility = View.VISIBLE
     }
 

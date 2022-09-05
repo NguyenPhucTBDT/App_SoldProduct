@@ -63,4 +63,7 @@ interface ApiInterface {
 
     @PUT("WSLibrary/api/address/update")
     suspend fun updateAddress(@Body address: Address) : Response<JsonElement>
+
+    @PUT("WSLibrary/api/order/cancel/{idO}")
+    suspend fun cancelOrder(@Path("idO") idO : Int) : Response<JsonElement>
 }

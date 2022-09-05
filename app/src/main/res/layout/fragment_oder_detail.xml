@@ -214,13 +214,15 @@
                 android:padding="@dimen/d5" />
         </LinearLayout>
     </ScrollView>
+
     <Button
-        android:textAllCaps="false"
-        android:textSize="@dimen/ts18"
-        android:text="Hủy đơn hàng"
-        android:textColor="@color/red"
-        android:background="@drawable/border_bottom_sheet"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/btn_cancel"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/border_bottom_sheet"
+        android:text="Hủy đơn hàng"
+        android:textAllCaps="false"
+        android:textColor="@color/red"
+        android:textSize="@dimen/ts18" />
 </RelativeLayout>

@@ -18,17 +18,7 @@
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/d50"
             android:gravity="center_horizontal"
-            android:textColor="@color/violet_dark"
-            android:textSize="@dimen/ts20"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tv_login"
-            android:layout_marginTop="@dimen/d50"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Đăng nhập"
+            android:text="@string/log_in"
             android:textColor="@color/violet_dark"
             android:textSize="@dimen/ts20"
             android:textStyle="bold" />
