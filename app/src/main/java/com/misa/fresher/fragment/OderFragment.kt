@@ -90,11 +90,16 @@ class OderFragment : Fragment() {
         ) {
             binding.tvPhone.text = it.name + " | " + it.phone
             binding.tvAddress.text = it.address
+            binding.tvPhone.visibility = View.VISIBLE
+            binding.tvAddress.visibility = View.VISIBLE
+            binding.tvNotice.visibility = View.GONE
             phone = it.phone
             address = it.address
             name = it.name
         }
         paymentModel.shipItem.observe(viewLifecycleOwner) {
+            binding.tvPaymentMethod.visibility = View.VISIBLE
+            binding.tvNoticePayment.visibility = View.GONE
             if (it == PAYMENT_TYPE_1) {
                 payment = PAYMENT_TYPE_1
                 binding.tvPaymentMethod.text = "Thanh toán khi nhận hàng"
@@ -131,37 +136,50 @@ class OderFragment : Fragment() {
                 it.quantity * it.price.toDouble()
             }
         }
-        viewModel.customer.observe(viewLifecycleOwner) {
-            val date = Date()
-            val format = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
-            val oderInfo = OrderInfo(
-                it.idU,
-                address.toString(), phone.toString(),name.toString(), amount.toFloat(), payment!!,
-                "", format.format(date), 1, list
-            )
-            val api = ApiHelper.getInstance().create(ApiInterface::class.java)
-            CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    val response = api.oderProduct(oderInfo)
-                    if (response.isSuccessful && response.body() != null) {
-                        withContext(Main) {
-                            val body = Gson().fromJson(response.body(), Messenger::class.java)
-                            activity?.showToast(body.msg)
-                            findNavController().navigate(R.id.action_oderFragment_to_saleFragment)
-                        }
-                    } else {
-                        if (response.code() == 404) {
-                            val body = Gson().fromJson(
-                                response.errorBody()!!.charStream(),
-                                Messenger::class.java
-                            )
-                            activity?.showToast(body.msg)
+        if (address == null || phone == null || name == null) {
+            activity?.showToast("Vui lòng chọn địa chỉ giao hàng")
+        } else if (payment == 0) {
+            activity?.showToast("Vui lòng chọn phương thức thanh toán")
+        } else {
+            viewModel.customer.observe(viewLifecycleOwner) {
+                val date = Date()
+                val format = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+                val oderInfo = OrderInfo(
+                    it.idU,
+                    address.toString(),
+                    phone.toString(),
+                    name.toString(),
+                    amount.toFloat(),
+                    payment!!,
+                    "",
+                    format.format(date),
+                    1,
+                    list
+                )
+                val api = ApiHelper.getInstance().create(ApiInterface::class.java)
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        val response = api.oderProduct(oderInfo)
+                        if (response.isSuccessful && response.body() != null) {
+                            withContext(Main) {
+                                val body = Gson().fromJson(response.body(), Messenger::class.java)
+                                activity?.showToast(body.msg)
+                                findNavController().navigate(R.id.action_oderFragment_to_saleFragment)
+                            }
                         } else {
-                            activity?.showToast("Có lỗi xảy ra, vui lòng thử lại")
+                            if (response.code() == 404) {
+                                val body = Gson().fromJson(
+                                    response.errorBody()!!.charStream(),
+                                    Messenger::class.java
+                                )
+                                activity?.showToast(body.msg)
+                            } else {
+                                activity?.showToast("Có lỗi xảy ra, vui lòng thử lại")
+                            }
                         }
-                    }
-                } catch (e: Exception) {
+                    } catch (e: Exception) {
 
+                    }
                 }
             }
         }

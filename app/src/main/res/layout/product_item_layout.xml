@@ -30,6 +30,7 @@
 
         <TextView
             android:id="@+id/tv_sale_price"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/d5"
@@ -49,6 +50,7 @@
             android:layout_marginBottom="@dimen/d5"
             android:gravity="start"
             android:text="10000"
+            android:visibility="visible"
             android:textColor="#E60D0D"
             android:textSize="@dimen/ts16" />
     </LinearLayout>

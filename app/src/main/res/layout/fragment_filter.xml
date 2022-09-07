@@ -94,6 +94,7 @@
         android:textSize="@dimen/ts16" />
 
     <TextView
+        android:visibility="gone"
         android:id="@+id/tvSize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -104,10 +105,10 @@
         android:layout_marginBottom="@dimen/d5"
         android:background="@null"
         android:text="Loại hiển thị"
-        android:textStyle="bold"
         android:textAllCaps="false"
         android:textColor="@color/black"
-        android:textSize="@dimen/ts20" />
+        android:textSize="@dimen/ts20"
+        android:textStyle="bold" />
 
     <!--    <Spinner-->
     <!--        android:id="@+id/spnSize"-->
@@ -118,6 +119,7 @@
     <!--        android:background="@color/white"-->
     <!--        android:textSize="@dimen/ts16" />-->
     <LinearLayout
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvSize"

@@ -43,11 +43,11 @@
     </LinearLayout>
 
     <ScrollView
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/ll_bottom"
-        android:layout_below="@id/llToolbar">
+        android:layout_below="@id/llToolbar"
+        android:background="@color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -85,7 +85,8 @@
                         android:layout_marginVertical="@dimen/d3"
                         android:text="Nguyễn Phúc | 0368894608"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/ts18" />
+                        android:textSize="@dimen/ts16"
+                        android:visibility="gone" />
 
                     <TextView
                         android:id="@+id/tv_address"
@@ -94,7 +95,15 @@
                         android:layout_marginVertical="@dimen/d3"
                         android:text="Ngõ 61 Phùng Chí Kiên, Cầu Giấy, Hà Nội"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/ts18" />
+                        android:textSize="@dimen/ts16"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tv_notice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Vui lòng chọn địa chỉ giao hàng"
+                        android:textSize="@dimen/ts16" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -119,6 +128,7 @@
                     android:textSize="@dimen/ts20" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/tv_payment_method"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -126,7 +136,16 @@
                     android:layout_marginStart="@dimen/d15"
                     android:text="Thanh toán khi nhận hàng"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/ts18" />
+                    android:textSize="@dimen/ts16" />
+
+                <TextView
+                    android:id="@+id/tv_notice_payment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="@dimen/d3"
+                    android:layout_marginStart="@dimen/d15"
+                    android:text="Vui lòng chọn phương thức thanh toán"
+                    android:textSize="@dimen/ts16" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -165,13 +184,13 @@
 
         <Button
             android:id="@+id/btn_order"
-            android:textAllCaps="false"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:background="@color/red"
             android:gravity="center"
             android:text="@string/order"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="@dimen/ts20" />
 

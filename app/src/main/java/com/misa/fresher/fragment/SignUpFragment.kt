@@ -112,8 +112,9 @@ class SignUpFragment : Fragment() {
                     withContext(Dispatchers.Main)
                     {
                         val msg = Gson().fromJson(signUp.body(), Messenger::class.java)
-                        binding.btnSignUp.visibility = View.GONE
+                        binding.flProgressBar.visibility = View.GONE
                         activity?.showToast(msg.msg)
+                        activity?.onBackPressed()
                     }
                 } else {
                     withContext(Dispatchers.Main) {
@@ -121,7 +122,7 @@ class SignUpFragment : Fragment() {
                             signUp.errorBody()!!.charStream(),
                             Messenger::class.java
                         )
-                        binding.btnSignUp.visibility = View.GONE
+                        binding.flProgressBar.visibility = View.GONE
                         activity?.showToast(msg.msg)
                     }
                 }
